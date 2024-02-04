@@ -168,7 +168,7 @@ function goToMainPage() {
       } else if (LocationS == 999) {
         window.location.href = "https://magicarchie.github.io/Stage_Selection_Finale/"; 
       } else {
-        window.location.href = "https://magicarchie.github.io/Stage_Selection_1/";
+        window.location.href = "Stage_Selection/STG_S1/index.html";
       }
 }
 
