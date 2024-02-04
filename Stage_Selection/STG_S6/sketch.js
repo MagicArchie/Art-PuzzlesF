@@ -23,12 +23,12 @@ let ProgressL = 666;
 
 // Array to store links for each node
 const nodeLinks = [
-  'https://magicarchie.github.io/Stage_1F/',
-  'https://magicarchie.github.io/Stage_2F/',
-  'https://magicarchie.github.io/Stage_3F/',
-  'https://magicarchie.github.io/Stage_4F/',
-  'https://magicarchie.github.io/Stage_5F/',
-  'https://magicarchie.github.io/Stage_6F/',
+  '../../Stages/STG1/index.html',
+  '../../Stages/STG2/index.html',
+  '../../Stages/STG3/index.html',
+  '../../Stages/STG4/index.html',
+  '../../Stages/STG5/index.html',
+  '../../Stages/STG6/index.html',
   'stage7.html'
 ];
 
@@ -113,7 +113,7 @@ function progressR() {
   clickedRs.play();
   localStorage.clear();
   setTimeout(function () {
-    window.location.href = 'https://magicarchie.github.io/Art-Puzzles/';
+    window.location.href = "../../index.html";
   }, 400);
 }
 
@@ -201,7 +201,7 @@ function mouseClicked() {
     homeButtonSound.play();
 
     setTimeout(function () {
-      window.location.href = 'https://magicarchie.github.io/Art-Puzzles/';
+      window.location.href = "../../index.html";
     }, 500);
   } else {
     for (let i = 0; i < stages.length; i++) {
@@ -253,31 +253,31 @@ function keyPressed() {
     // Check the entered code and redirect the user
     if (userCode === "+Stg-1") {
       console.log("Code +Stg-1 entered. Redirecting to StageSelection 1");
-      window.location.href = "https://magicarchie.github.io/Stage_Selection_1/";
+      window.location.href = "../STG_S1/index.html";
     } else if (userCode === "+Stg-2") {
       console.log("Code +Stg-2 entered. Redirecting to StageSelection 2");
-      window.location.href = "https://magicarchie.github.io/Stage_Selection_2/";
+      window.location.href = "../STG_S2/index.html";
     } else if (userCode === "+Stg-3") {
       console.log("Code +Stg-3 entered. Redirecting to StageSelection 3");
-      window.location.href = "https://magicarchie.github.io/Stage_Selection_3/";
+      window.location.href = "../STG_S3/index.html";
     } else if (userCode === "+Stg-4") {
       console.log("Code +Stg-4 entered. Redirecting to StageSelection 4");
-      window.location.href = "https://magicarchie.github.io/Stage_Selection_4/";
+      window.location.href = "../STG_S4/index.html";
     } else if (userCode === "+Stg-5") {
       console.log("Code +Stg-5 entered. Redirecting to StageSelection 5");
-      window.location.href = "https://magicarchie.github.io/Stage_Selection_5/";
+      window.location.href = "../STG_S5/index.html";
     } else if (userCode === "+Stg-6") {
       console.log("Code +Stg-6 entered. Redirecting to StageSelection 6");
-      window.location.href = "https://magicarchie.github.io/Stage_Selection_6/";
+      window.location.href = "../STG_S6/index.html";
     } else if (userCode === "+Stg-7") {
       console.log("Code +Stg-7 entered. Redirecting to StageSelection 7");
-      window.location.href = "https://magicarchie.github.io/Stage_Selection_7/";
+      window.location.href = "../STG_S7/index.html";
     } else if (userCode === "+Stg-S") {
       console.log("Code +Stg-S entered. Redirecting to StageSelection S");
-      window.location.href = "https://magicarchie.github.io/Stage_Selection_Secret/";
+      window.location.href = "../STG_Ss/index.html";
     } else if (userCode === "+Stg-F") {
       console.log("Code +Stg-F entered. Redirecting to StageSelection F");
-      window.location.href = "https://magicarchie.github.io/Stage_Selection_Finale/";
+      window.location.href = "../STG_Sf/index.html";
     } else {
       console.log("Invalid code. No redirection.");
     }
