@@ -152,21 +152,21 @@ function goToMainPage() {
   if (LocationS == 111) {
         window.location.href = "Stage_Selection/STG_S1/index.html";
       } else if (LocationS == 222) {
-        window.location.href = "https://magicarchie.github.io/Stage_Selection_2/";       
+        window.location.href = "Stage_Selection/STG_S2/index.html";      
       } else if (LocationS == 333) {
-        window.location.href = "https://magicarchie.github.io/Stage_Selection_3/";       
+        window.location.href = "Stage_Selection/STG_S3/index.html";       
       } else if (LocationS == 444) {
-        window.location.href = "https://magicarchie.github.io/Stage_Selection_4/";      
+        window.location.href = "Stage_Selection/STG_S4/index.html";      
       } else if (LocationS == 555) {
-        window.location.href = "https://magicarchie.github.io/Stage_Selection_5/";    
+        window.location.href = "Stage_Selection/STG_S5/index.html";    
       } else if (LocationS == 666) {
-        window.location.href = "https://magicarchie.github.io/Stage_Selection_6/";       
+        window.location.href = "Stage_Selection/STG_S6/index.html";       
       } else if (LocationS == 777) {
-        window.location.href = "https://magicarchie.github.io/Stage_Selection_7/";      
+        window.location.href = "Stage_Selection/STG_S7/index.html";     
       } else if (LocationS == 888) {
-        window.location.href = "https://magicarchie.github.io/Stage_Selection_Secret/";   
+        window.location.href = "Stage_Selection/STG_Ss/index.html";   
       } else if (LocationS == 999) {
-        window.location.href = "https://magicarchie.github.io/Stage_Selection_Finale/"; 
+        window.location.href = "Stage_Selection/STG_Sf/index.html";
       } else {
         window.location.href = "Stage_Selection/STG_S1/index.html";
       }
