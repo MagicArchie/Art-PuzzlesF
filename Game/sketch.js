@@ -448,23 +448,23 @@ function exit() {
   Quit.play();
   setTimeout(function () {
     if (Stage == 11) {
-      window.location.href = "https://magicarchie.github.io/Stage_1F/";
+      window.location.href = "../Stages/STG1/index.html";
     } else if (Stage == 22) {
-      window.location.href = "https://magicarchie.github.io/Stage_2F/";
+      window.location.href = "../Stages/STG2/index.html";
     } else if (Stage == 33) {
-      window.location.href = "https://magicarchie.github.io/Stage_3F/";
+      window.location.href = "../Stages/STG3/index.html";
     } else if (Stage == 44) {
-      window.location.href = "https://magicarchie.github.io/Stage_4F/";
+      window.location.href = "../Stages/STG4/index.html";
     } else if (Stage == 55) {
-      window.location.href = "https://magicarchie.github.io/Stage_5F/";
+      window.location.href = "../Stages/STG5/index.html";
     } else if (Stage == 66) {
-      window.location.href = "https://magicarchie.github.io/Stage_6F/";
+      window.location.href = "../Stages/STG6/index.html";
     } else if (Stage == 77) {
-      window.location.href = "https://magicarchie.github.io/Stage_7F/";
+      window.location.href = "../Stages/STG7/index.html";
     } else if (Stage == 88) {
-      window.location.href = "https://magicarchie.github.io/Stage_Selection_Secret/";
+      window.location.href = "../Stage_Selection/STG_Ss/index.html";
     } else if (Stage == 99) {
-      window.location.href = "https://magicarchie.github.io/Stage_Selection_Finale/";
+      window.location.href = "../Stage_Selection/STG_Sf/index.html";
     }
   }, 1600);
 }
@@ -526,26 +526,26 @@ function exitGame() {
   Exit.play();
   setTimeout(function () {
     if (Stage == 11) {
-      window.location.href = "https://magicarchie.github.io/Stage_1F/";
+      window.location.href = "../Stages/STG1/index.html";
     } else if (Stage == 22) {
-      window.location.href = "https://magicarchie.github.io/Stage_2F/";
+      window.location.href = "../Stages/STG2/index.html";
     } else if (Stage == 33) {
-      window.location.href = "https://magicarchie.github.io/Stage_3F/";
+      window.location.href = "../Stages/STG3/index.html";
     } else if (Stage == 44) {
-      window.location.href = "https://magicarchie.github.io/Stage_4F/";
+      window.location.href = "../Stages/STG4/index.html";
     } else if (Stage == 55) {
-      window.location.href = "https://magicarchie.github.io/Stage_5F/";
+      window.location.href = "../Stages/STG5/index.html";
     } else if (Stage == 66) {
-      window.location.href = "https://magicarchie.github.io/Stage_6F/";
+      window.location.href = "../Stages/STG6/index.html";
     } else if (Stage == 77) {
-      window.location.href = "https://magicarchie.github.io/Stage_7F/";
+      window.location.href = "../Stages/STG7/index.html";
     } else if (Stage == 99) {
-      window.location.href = "https://magicarchie.github.io/Stage_Selection_Finale/";
+      window.location.href = "../Stage_Selection/STG_Sf/index.html";
     } else if (Stage == 88) {
       if (victoryTextVisible) {
-        window.location.href = "https://magicarchie.github.io/Stage_Selection_Finale/";
+        window.location.href = "../Stage_Selection/STG_Sf/index.html";
       } else {
-        window.location.href = "https://magicarchie.github.io/Stage_Selection_Secret/";
+        window.location.href = "../Stage_Selection/STG_Ss/index.html";
       }
     }
   }, 1700);
