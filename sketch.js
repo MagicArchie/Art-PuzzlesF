@@ -150,7 +150,7 @@ function mousePressed() {
 
 function goToMainPage() {
   if (LocationS == 111) {
-        window.location.href = "https://magicarchie.github.io/Stage_Selection_1/";
+        window.location.href = "Stage_Selection/STG_S1/index.html";
       } else if (LocationS == 222) {
         window.location.href = "https://magicarchie.github.io/Stage_Selection_2/";       
       } else if (LocationS == 333) {
