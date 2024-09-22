@@ -43,10 +43,10 @@ function setup() {
   infoButton.position(buttonX2, buttonY2);
   infoButton.mousePressed(toggleDialog);
 
-  // Mute button setup (position it with margin from the info button)
+  // Mute button setup (position it with a larger margin from the info button)
   muteButton = createImg('materials/images/volume_button.png', 'Mute Music');
   muteButton.size(buttonDiameter2, buttonDiameter2);
-  muteButton.position(buttonX2, buttonY2 - buttonDiameter2 - 20);  // Ensure a margin of 20 pixels between the buttons
+  muteButton.position(buttonX2, buttonY2 - buttonDiameter2 - 50);  // Increased margin to 50 pixels
   muteButton.mousePressed(toggleMute);
 
   backgroundMusic1.setVolume(0.5);
@@ -197,5 +197,5 @@ function windowResized() {
   infoButton.position(buttonX2, buttonY2);
 
   muteButton.size(buttonDiameter2, buttonDiameter2);
-  muteButton.position(buttonX2, buttonY2 - buttonDiameter2 - 20);  // Ensure 20 pixels between the buttons
+  muteButton.position(buttonX2, buttonY2 - buttonDiameter2 - 50);  // Increased margin to 50 pixels
 }
