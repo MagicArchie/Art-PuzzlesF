@@ -31,7 +31,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   
   buttonWidth1 = width * 0.15;
-  buttonHeight1 = height * 0.1;
+  buttonHeight1 = height * 0.08;
 
   buttonDiameterInfo = min(width, height) * 0.07;
   buttonDiameterMute = min(width, height) * 0.1;
