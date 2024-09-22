@@ -1,6 +1,7 @@
 let backgroundImage;
-let buttonWidth1, buttonHeight1;  // Rectangular continue button
-let buttonDiameterInfo, buttonDiameterMute;  // Info and mute button diameters
+let buttonWidth1 = 200;
+let buttonHeight1 = 80;
+let buttonDiameterInfo, buttonDiameterMute;
 let buttonX2, buttonY2;
 let dialogOpen = false;
 let dialog;
@@ -19,7 +20,6 @@ let LocationS = parseInt(localStorage.getItem('PageL'), 10);
 
 function preload() {
   backgroundImage = loadImage('materials/images/Background10.jpg');
-  
   muteSound = loadSound('materials/sounds/Button S1.wav');
   infoButtonSound = loadSound('materials/sounds/start.mp3');
   continueButtonSound = loadSound('materials/sounds/interface5.mp3');
@@ -37,17 +37,18 @@ function setup() {
   buttonDiameterMute = min(width, height) * 0.1;
   
   buttonX2 = width * 0.05;  // Info button positioned 5% from the left
-  buttonY2 = height * 0.75; // Info button positioned 75% from the top
+  buttonY2 = height * 0.65; // Adjust to place buttons higher on the screen
 
   infoButton = createImg('materials/images/Info_Button.png', 'info-button');
   infoButton.size(buttonDiameterInfo, buttonDiameterInfo);
   infoButton.position(buttonX2, buttonY2);
+  infoButton.mousePressed(toggleDialog); // Ensure event handling is set correctly
 
   muteButton = createImg('materials/images/volume_button.png', 'Mute Music');
   muteButton.size(buttonDiameterMute, buttonDiameterMute);
   
-  // Adjust mute button placement to ensure visibility
-  muteButton.position(buttonX2, buttonY2 + buttonDiameterInfo + 60);  // Keep it below the info button with adequate spacing
+  // Adjust mute button position
+  muteButton.position(buttonX2, buttonY2 + buttonDiameterInfo + 40);  // Keep it below the info button with adequate spacing
   muteButton.mousePressed(toggleMute);
 
   backgroundMusic1.setVolume(0.5);
@@ -102,45 +103,40 @@ function draw() {
   }
 }
 
-function mousePressed() {
-  let buttonX = width / 2 - buttonWidth1 / 2;
-  let buttonY = height * 0.65;
-  if (mouseX > buttonX && mouseX < buttonX + buttonWidth1 && mouseY > buttonY && mouseY < buttonY + buttonHeight1) {
-    console.log('Continue Button clicked!');
-    continueButtonSound.setVolume(0.5);
-    continueButtonSound.play();
-    setTimeout(function () {
-      goToMainPage();
-    }, 1000);  // Reduced delay to 1 second for better user experience
-  }
-}
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 
-function goToMainPage() {
-  const pages = {
-    111: "Stage_Selection/STG_S1/index.html",
-    222: "Stage_Selection/STG_S2/index.html",
-    333: "Stage_Selection/STG_S3/index.html",
-    444: "Stage_Selection/STG_S4/index.html",
-    555: "Stage_Selection/STG_S5/index.html",
-    666: "Stage_Selection/STG_S6/index.html",
-    777: "Stage_Selection/STG_S7/index.html",
-    888: "Stage_Selection/STG_Ss/index.html",
-    999: "Stage_Selection/STG_Sf/index.html",
-    default: "Stage_Selection/STG_S1/index.html",
-  };
+  buttonWidth1 = width * 0.15;
+  buttonHeight1 = height * 0.1;
 
-  window.location.href = pages[LocationS] || pages.default;
+  buttonDiameterInfo = min(width, height) * 0.07;
+  buttonDiameterMute = min(width, height) * 0.1;
+  
+  buttonX2 = width * 0.05;  // Keep consistent positioning
+  buttonY2 = height * 0.65; // Keep consistent positioning
+
+  infoButton.size(buttonDiameterInfo, buttonDiameterInfo);
+  infoButton.position(buttonX2, buttonY2);
+
+  muteButton.size(buttonDiameterMute, buttonDiameterMute);
+  
+  // Ensure mute button remains visible
+  muteButton.position(buttonX2, buttonY2 + buttonDiameterInfo + 40);  // Adjust spacing
 }
 
 function toggleDialog() {
   playInfoButtonSound();
-  dialogOpen ? closeDialog() : openDialog();
+  if (dialogOpen) {
+    closeDialog();
+  } else {
+    openDialog();
+  }
 }
 
 function openDialog() {
   dialog = createDiv('');
-  dialog.position(width * 0.07, height * 0.2);  // 7% from the left, 20% from the top
-  dialog.size(width * 0.3, height * 0.2);  // 30% width, 20% height
+  dialog.position(100, 165);
+  dialog.size(300, 100);
   dialog.style('background-color', '#FCFCFC');
   dialog.style('opacity', '0.8');
   dialog.style('padding', '10px');
@@ -163,8 +159,15 @@ function closeDialog() {
 
 function toggleMute() {
   playMuteSound();
-  isMuted ? currentMusic.setVolume(0.5) : currentMusic.setVolume(0.0);  // Toggle mute
-  muteButton.attribute('src', isMuted ? 'materials/images/volume_button.png' : 'materials/images/volume_button V2.png');
+  if (isMuted) {
+    currentMusic.setVolume(0.5); // Unmute
+    muteButton.html('Mute Music');
+    muteButton.attribute('src', 'materials/images/volume_button.png');
+  } else {
+    currentMusic.setVolume(0.0); // Mute
+    muteButton.html('Unmute Music');
+    muteButton.attribute('src', 'materials/images/volume_button V2.png');
+  }
   isMuted = !isMuted;
 }
 
@@ -176,26 +179,4 @@ function playMuteSound() {
 function playInfoButtonSound() {
   infoButtonSound.setVolume(0.5);
   infoButtonSound.play();
-}
-
-// Handle window resizing
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-
-  buttonWidth1 = width * 0.15;
-  buttonHeight1 = height * 0.1;
-
-  buttonDiameterInfo = min(width, height) * 0.07;
-  buttonDiameterMute = min(width, height) * 0.1;
-  
-  buttonX2 = width * 0.05;  // Keep consistent positioning
-  buttonY2 = height * 0.75; // Keep consistent positioning
-
-  infoButton.size(buttonDiameterInfo, buttonDiameterInfo);
-  infoButton.position(buttonX2, buttonY2);
-
-  muteButton.size(buttonDiameterMute, buttonDiameterMute);
-  
-  // Ensure mute button remains visible
-  muteButton.position(buttonX2, buttonY2 + buttonDiameterInfo + 60);  // Position below info button
 }
