@@ -1,6 +1,6 @@
 let backgroundImage;
-let buttonDiameter1;  // Circular continue button
-let buttonDiameter2;  // Circular info and mute buttons
+let buttonWidth1, buttonHeight1;  // Rectangular continue button
+let buttonDiameterInfo, buttonDiameterMute;  // Info and mute button diameters
 let buttonX2, buttonY2;
 let dialogOpen = false;
 let dialog;
@@ -28,25 +28,29 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);  // Adjust the canvas to the window size
+  createCanvas(windowWidth, windowHeight);  // Adjust canvas to window size
   
-  // Button diameters relative to the window size
-  buttonDiameter1 = min(width, height) * 0.1;  // Circular continue button (10% of the smaller dimension)
-  buttonDiameter2 = min(width, height) * 0.07; // Circular info and mute buttons (7% of the smaller dimension)
+  // Continue button dimensions (rectangular)
+  buttonWidth1 = width * 0.15;  // 15% of window width
+  buttonHeight1 = height * 0.1; // 10% of window height
   
-  buttonX2 = width / 20 - buttonDiameter2 / 2;
+  // Info and mute button diameters
+  buttonDiameterInfo = min(width, height) * 0.07;  // Info button: 7% of the smaller window dimension
+  buttonDiameterMute = min(width, height) * 0.1;   // Mute button: 10% of the smaller window dimension
+  
+  buttonX2 = width / 20 - buttonDiameterInfo / 2;
   buttonY2 = height * 0.15;
 
   // Info button setup
   infoButton = createImg('materials/images/Info_Button.png', 'info-button');
-  infoButton.size(buttonDiameter2, buttonDiameter2);
+  infoButton.size(buttonDiameterInfo, buttonDiameterInfo);
   infoButton.position(buttonX2, buttonY2);
   infoButton.mousePressed(toggleDialog);
 
-  // Mute button setup (position it with a larger margin from the info button)
+  // Mute button setup (larger than the info button)
   muteButton = createImg('materials/images/volume_button.png', 'Mute Music');
-  muteButton.size(buttonDiameter2, buttonDiameter2);
-  muteButton.position(buttonX2, buttonY2 - buttonDiameter2 - 50);  // Increased margin to 50 pixels
+  muteButton.size(buttonDiameterMute, buttonDiameterMute);
+  muteButton.position(buttonX2, buttonY2 - buttonDiameterMute - 60);  // Added a 60px margin for more spacing
   muteButton.mousePressed(toggleMute);
 
   backgroundMusic1.setVolume(0.5);
@@ -60,7 +64,7 @@ function setup() {
 }
 
 function draw() {
-  image(backgroundImage, 0, 0, width, height);  // Adjust the background image to fit the canvas
+  image(backgroundImage, 0, 0, width, height);  // Adjust background image to fit canvas
   
   // Adjust for invalid LocationS values
   if (![111, 222, 333, 444, 555, 666, 777, 888, 999].includes(LocationS)) {
@@ -81,23 +85,23 @@ function draw() {
   fill(255);
   text('Press the button below to get started..', width / 2, height * 0.55);  // 55% down from the top
 
-  let buttonX = width / 2 - buttonDiameter1 / 2;
+  let buttonX = width / 2 - buttonWidth1 / 2;
   let buttonY = height * 0.65;  // 65% down from the top
   
-  // Draw circular continue button with hover effect
-  if (mouseX > buttonX && mouseX < buttonX + buttonDiameter1 && mouseY > buttonY && mouseY < buttonY + buttonDiameter1) {
+  // Draw rectangular continue button with hover effect
+  if (mouseX > buttonX && mouseX < buttonX + buttonWidth1 && mouseY > buttonY && mouseY < buttonY + buttonHeight1) {
     fill(90, 90, 90, 190);
   } else {
     fill(130, 130, 130, 190);
   }
   
-  ellipse(buttonX + buttonDiameter1 / 2, buttonY + buttonDiameter1 / 2, buttonDiameter1);  // Draw circular button
+  rect(buttonX, buttonY, buttonWidth1, buttonHeight1, 20);  // Rectangular button with rounded corners (radius 20)
 
   textSize(width * 0.02);  // Scale text size for the "Continue" button (2%)
-  fill(mouseX > buttonX && mouseX < buttonX + buttonDiameter1 && mouseY > buttonY && mouseY < buttonY + buttonDiameter1 ? 200 : 255);
+  fill(mouseX > buttonX && mouseX < buttonX + buttonWidth1 && mouseY > buttonY && mouseY < buttonY + buttonHeight1 ? 200 : 255);
   stroke(1);
   strokeWeight(4);
-  text('Continue', width / 2, buttonY + buttonDiameter1 / 2);
+  text('Continue', width / 2, buttonY + buttonHeight1 / 2);
   
   // Switch music when the current one ends
   if (!currentMusic.isPlaying()) {
@@ -107,9 +111,9 @@ function draw() {
 }
 
 function mousePressed() {
-  let buttonX = width / 2 - buttonDiameter1 / 2;
+  let buttonX = width / 2 - buttonWidth1 / 2;
   let buttonY = height * 0.65;
-  if (mouseX > buttonX && mouseX < buttonX + buttonDiameter1 && mouseY > buttonY && mouseY < buttonY + buttonDiameter1) {
+  if (mouseX > buttonX && mouseX < buttonX + buttonWidth1 && mouseY > buttonY && mouseY < buttonY + buttonHeight1) {
     console.log('Continue Button clicked!');
     continueButtonSound.setVolume(0.5);
     continueButtonSound.play();
@@ -187,15 +191,18 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   
   // Recalculate button sizes and positions
-  buttonDiameter1 = min(width, height) * 0.1;
-  buttonDiameter2 = min(width, height) * 0.07;
+  buttonWidth1 = width * 0.15;  // Continue button (15% of window width)
+  buttonHeight1 = height * 0.1; // Continue button (10% of window height)
   
-  buttonX2 = width / 20 - buttonDiameter2 / 2;
+  buttonDiameterInfo = min(width, height) * 0.07;  // Info button: 7% of the smaller dimension
+  buttonDiameterMute = min(width, height) * 0.1;   // Mute button: 10% of the smaller dimension
+  
+  buttonX2 = width / 20 - buttonDiameterInfo / 2;
   buttonY2 = height * 0.15;
 
-  infoButton.size(buttonDiameter2, buttonDiameter2);
+  infoButton.size(buttonDiameterInfo, buttonDiameterInfo);
   infoButton.position(buttonX2, buttonY2);
 
-  muteButton.size(buttonDiameter2, buttonDiameter2);
-  muteButton.position(buttonX2, buttonY2 - buttonDiameter2 - 50);  // Increased margin to 50 pixels
+  muteButton.size(buttonDiameterMute, buttonDiameterMute);
+  muteButton.position(buttonX2, buttonY2 - buttonDiameterMute - 60);  // Adjust for extra spacing between buttons
 }
