@@ -77,7 +77,7 @@ function draw() {
 
   textSize(width * 0.02);
   fill(255);
-  text('Press the button below to get started..', width / 2, height * 0.55);
+  text('Press the button below to get started..', width / 2, height * 0.50);
 
   let buttonX = width / 2 - buttonWidth1 / 2;
   let buttonY = height * 0.65;
