@@ -2,7 +2,7 @@ let backgroundImage;
 let buttonWidth1 = 200;
 let buttonHeight1 = 80;
 let buttonDiameterInfo, buttonDiameterMute;
-let buttonX2, buttonY2;
+let buttonX2, buttonY2, buttonX0, buttonY0, buttonX01, buttonY01;
 let dialogOpen = false;
 let dialog;
 let infoButton;
@@ -36,20 +36,20 @@ function setup() {
   buttonDiameterInfo = min(width, height) * 0.07;
   buttonDiameterMute = min(width, height) * 0.1;
   
-  buttonX2 = width * 0.05;  // Info button positioned 5% from the left
-  buttonY2 = height * 0.65; // Adjust to place buttons higher on the screen
-
-  infoButton = createImg('materials/images/Info_Button.png', 'info-button');
-  infoButton.size(buttonDiameterInfo, buttonDiameterInfo);
-  infoButton.position(buttonX2, buttonY2);
-  infoButton.mousePressed(toggleDialog); // Ensure event handling is set correctly
+  buttonX2 = width * 0.05;  // Positioned 5% from the left
+  buttonY2 = height * 0.05; // Positioned 5% from the top
 
   muteButton = createImg('materials/images/volume_button.png', 'Mute Music');
   muteButton.size(buttonDiameterMute, buttonDiameterMute);
-  
-  // Adjust mute button position
-  muteButton.position(buttonX2, buttonY2 + buttonDiameterInfo + 40);  // Keep it below the info button with adequate spacing
+  muteButton.position(buttonX2, buttonY2);
   muteButton.mousePressed(toggleMute);
+
+  infoButton = createImg('materials/images/Info_Button.png', 'info-button');
+  infoButton.size(buttonDiameterInfo, buttonDiameterInfo);
+  
+  // Place info button below the mute button with adequate spacing
+  infoButton.position(buttonX2, buttonY2 + buttonDiameterMute + 20);  
+  infoButton.mousePressed(toggleDialog);
 
   backgroundMusic1.setVolume(0.5);
   backgroundMusic2.setVolume(0.5);
@@ -112,16 +112,18 @@ function windowResized() {
   buttonDiameterInfo = min(width, height) * 0.07;
   buttonDiameterMute = min(width, height) * 0.1;
   
-  buttonX2 = width * 0.05;  // Keep consistent positioning
-  buttonY2 = height * 0.65; // Keep consistent positioning
-
-  infoButton.size(buttonDiameterInfo, buttonDiameterInfo);
-  infoButton.position(buttonX2, buttonY2);
+  buttonX2 = width * 0.04;  // Keep consistent positioning
+  buttonY2 = height * 0.04; // Keep consistent positioning
+  buttonX0 = buttonX2*0.7;
+  buttonY0 = buttonY2*0.65;
 
   muteButton.size(buttonDiameterMute, buttonDiameterMute);
+  muteButton.position(buttonX0, buttonY0);
+
+  infoButton.size(buttonDiameterInfo, buttonDiameterInfo);
   
-  // Ensure mute button remains visible
-  muteButton.position(buttonX2, buttonY2 + buttonDiameterInfo + 40);  // Adjust spacing
+  // Ensure info button is positioned below the mute button
+  infoButton.position(buttonX2, buttonY2 + buttonDiameterMute + 20);  
 }
 
 function toggleDialog() {
@@ -134,8 +136,11 @@ function toggleDialog() {
 }
 
 function openDialog() {
+  buttonX01 = buttonX2 + buttonDiameterInfo;
+  buttonY01 = buttonY2 * 4.8;
+  
   dialog = createDiv('');
-  dialog.position(100, 165);
+  dialog.position(buttonX01, buttonY01);
   dialog.size(300, 100);
   dialog.style('background-color', '#FCFCFC');
   dialog.style('opacity', '0.8');
