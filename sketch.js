@@ -1,8 +1,6 @@
 let backgroundImage;
-let buttonWidth1 = 200;
-let buttonHeight1 = 80;
-let buttonWidth2 = 70;
-let buttonHeight2 = 70;
+let buttonWidth1, buttonHeight1;
+let buttonWidth2, buttonHeight2;
 let buttonX2;
 let buttonY2;
 let dialogOpen = false;
@@ -36,9 +34,16 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1400, 800);
+  createCanvas(windowWidth, windowHeight);  // Adjust the canvas to the window size
+  
+  // Button sizes relative to the window size
+  buttonWidth1 = width * 0.2;  // 20% of the window width
+  buttonHeight1 = height * 0.1; // 10% of the window height
+  buttonWidth2 = width * 0.05;  // 5% of the window width
+  buttonHeight2 = height * 0.08; // 8% of the window height
+  
   buttonX2 = width / 20 - buttonWidth2 / 2;
-  buttonY2 = 120;
+  buttonY2 = height * 0.15;
 
   infoButton = createImg('materials/images/Info_Button.png', 'info-button');
   infoButton.size(buttonWidth2 - 10, buttonHeight2 - 10);
@@ -57,134 +62,94 @@ function setup() {
   currentMusic = backgroundMusic1;
   currentMusic.play();
   
-  
-
   continueButtonSound.setVolume(1.0);
 }
 
 function draw() {
-  image(backgroundImage, 0, 0, width, height);
+  image(backgroundImage, 0, 0, width, height);  // Adjust the background image to fit the canvas
   
-  if (LocationS != 111 || LocationS != 222 || LocationS != 333 || LocationS != 444 || LocationS != 555 || LocationS != 666 || LocationS != 777 || LocationS != 888 || LocationS != 999) {
-    LocationS = 1
+  // Adjust for invalid LocationS values
+  if (![111, 222, 333, 444, 555, 666, 777, 888, 999].includes(LocationS)) {
+    LocationS = 1;
     localStorage.setItem('PageL', LocationS);
   } else {
     localStorage.setItem('PageL', LocationS);
   }
 
-  textSize(100);
+  textSize(width * 0.07);  // Scale text size to screen width (7%)
   textAlign(CENTER, CENTER);
   fill(255);
-  //textFont('Granesta', 100);
   stroke(50);
   strokeWeight(3);
-  text('Welcome!', width / 2, 375);
+  text('Welcome!', width / 2, height * 0.4);  // 40% down from the top of the screen
 
-  textSize(30);
-  textAlign(CENTER, CENTER);
+  textSize(width * 0.02);  // Scale text for the instruction (2% of the screen width)
   fill(255);
-  text('Press the button below to get started..', width / 2, 450);
+  text('Press the button below to get started..', width / 2, height * 0.55);  // 55% down from the top
 
   let buttonX = width / 2 - buttonWidth1 / 2;
-  let buttonY = 500;
+  let buttonY = height * 0.65;  // 65% down from the top
   
-  if (
-    mouseX > buttonX &&
-    mouseX < buttonX + buttonWidth1 &&
-    mouseY > buttonY &&
-    mouseY < buttonY + buttonHeight1
-  ) {
-  fill(90, 90, 90, 190);
+  if (mouseX > buttonX && mouseX < buttonX + buttonWidth1 && mouseY > buttonY && mouseY < buttonY + buttonHeight1) {
+    fill(90, 90, 90, 190);
   } else {
-  fill(130, 130, 130, 190);
+    fill(130, 130, 130, 190);
   }
   
   rect(buttonX, buttonY, buttonWidth1, buttonHeight1, 500);
 
-  textSize(30);
-    if (
-    mouseX > buttonX &&
-    mouseX < buttonX + buttonWidth1 &&
-    mouseY > buttonY &&
-    mouseY < buttonY + buttonHeight1
-  ) {
-  fill(200);
-  } else {
-  fill(255);
-  }
+  textSize(width * 0.02);  // Scale text size for the "Continue" button (2%)
+  fill(mouseX > buttonX && mouseX < buttonX + buttonWidth1 && mouseY > buttonY && mouseY < buttonY + buttonHeight1 ? 200 : 255);
   stroke(1);
   strokeWeight(4);
   text('Continue', width / 2, buttonY + buttonHeight1 / 2);
   
-  // Check if the current music has ended
+  // Switch music when the current one ends
   if (!currentMusic.isPlaying()) {
-    // Switch to the other music
-    if (currentMusic == backgroundMusic1) {
-      currentMusic = backgroundMusic2;
-    } else {
-      currentMusic = backgroundMusic1;
-    }
-
-    // Start playing the new music
+    currentMusic = currentMusic == backgroundMusic1 ? backgroundMusic2 : backgroundMusic1;
     currentMusic.loop();
   }
 }
 
 function mousePressed() {
   let buttonX = width / 2 - buttonWidth1 / 2;
-  let buttonY = 500;
-  if (
-    mouseX > buttonX &&
-    mouseX < buttonX + buttonWidth1 &&
-    mouseY > buttonY &&
-    mouseY < buttonY + buttonHeight1
-  ) {
+  let buttonY = height * 0.65;
+  if (mouseX > buttonX && mouseX < buttonX + buttonWidth1 && mouseY > buttonY && mouseY < buttonY + buttonHeight1) {
     console.log('Continue Button clicked!');
     continueButtonSound.setVolume(0.5);
     continueButtonSound.play();
     setTimeout(function () {
       goToMainPage();
-    }, 3000);
+    }, 1000);  // Reduced delay to 1 second for better user experience
   }
 }
 
 function goToMainPage() {
-  if (LocationS == 111) {
-        window.location.href = "Stage_Selection/STG_S1/index.html";
-      } else if (LocationS == 222) {
-        window.location.href = "Stage_Selection/STG_S2/index.html";      
-      } else if (LocationS == 333) {
-        window.location.href = "Stage_Selection/STG_S3/index.html";       
-      } else if (LocationS == 444) {
-        window.location.href = "Stage_Selection/STG_S4/index.html";      
-      } else if (LocationS == 555) {
-        window.location.href = "Stage_Selection/STG_S5/index.html";    
-      } else if (LocationS == 666) {
-        window.location.href = "Stage_Selection/STG_S6/index.html";       
-      } else if (LocationS == 777) {
-        window.location.href = "Stage_Selection/STG_S7/index.html";     
-      } else if (LocationS == 888) {
-        window.location.href = "Stage_Selection/STG_Ss/index.html";   
-      } else if (LocationS == 999) {
-        window.location.href = "Stage_Selection/STG_Sf/index.html";
-      } else {
-        window.location.href = "Stage_Selection/STG_S1/index.html";
-      }
+  const pages = {
+    111: "Stage_Selection/STG_S1/index.html",
+    222: "Stage_Selection/STG_S2/index.html",
+    333: "Stage_Selection/STG_S3/index.html",
+    444: "Stage_Selection/STG_S4/index.html",
+    555: "Stage_Selection/STG_S5/index.html",
+    666: "Stage_Selection/STG_S6/index.html",
+    777: "Stage_Selection/STG_S7/index.html",
+    888: "Stage_Selection/STG_Ss/index.html",
+    999: "Stage_Selection/STG_Sf/index.html",
+    default: "Stage_Selection/STG_S1/index.html",
+  };
+
+  window.location.href = pages[LocationS] || pages.default;
 }
 
 function toggleDialog() {
   playInfoButtonSound();
-  if (dialogOpen) {
-    closeDialog();
-  } else {
-    openDialog();
-  }
+  dialogOpen ? closeDialog() : openDialog();
 }
 
 function openDialog() {
   dialog = createDiv('');
-  dialog.position(100, 165);
-  dialog.size(300, 100);
+  dialog.position(width * 0.07, height * 0.2);  // 7% from the left, 20% from the top
+  dialog.size(width * 0.3, height * 0.2);  // 30% width, 20% height
   dialog.style('background-color', '#FCFCFC');
   dialog.style('opacity', '0.8');
   dialog.style('padding', '10px');
@@ -207,24 +172,37 @@ function closeDialog() {
 
 function toggleMute() {
   playMuteSound();
-  if (isMuted) {
-    currentMusic.setVolume(0.5); // Unmute
-    muteButton.html('Mute Music');
-    muteButton.attribute('src', 'materials/images/volume_button.png');
-  } else {
-    currentMusic.setVolume(0.0); // Mute
-    muteButton.html('Unmute Music');
-    muteButton.attribute('src', 'materials/images/volume_button V2.png');
-  }
+  isMuted ? currentMusic.setVolume(0.5) : currentMusic.setVolume(0.0);  // Toggle mute
+  muteButton.attribute('src', isMuted ? 'materials/images/volume_button.png' : 'materials/images/volume_button V2.png');
   isMuted = !isMuted;
 }
 
 function playMuteSound() {
-    muteSound.setVolume(0.3);
-    muteSound.play();
+  muteSound.setVolume(0.3);
+  muteSound.play();
 }
 
 function playInfoButtonSound() {
-    infoButtonSound.setVolume(0.5);
-    infoButtonSound.play();
+  infoButtonSound.setVolume(0.5);
+  infoButtonSound.play();
+}
+
+// Handle window resizing
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  
+  // Recalculate button sizes and positions
+  buttonWidth1 = width * 0.2;
+  buttonHeight1 = height * 0.1;
+  buttonWidth2 = width * 0.05;
+  buttonHeight2 = height * 0.08;
+  
+  buttonX2 = width / 20 - buttonWidth2 / 2;
+  buttonY2 = height * 0.15;
+
+  infoButton.size(buttonWidth2 - 10, buttonHeight2 - 10);
+  infoButton.position(buttonX2 + 10, buttonY2);
+
+  muteButton.size(buttonWidth2 + 10, buttonHeight2 + 10);
+  muteButton.position(buttonX2, buttonY2 - 100);
 }
