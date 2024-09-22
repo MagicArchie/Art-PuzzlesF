@@ -114,7 +114,7 @@ function windowResized() {
   
   buttonX2 = width * 0.04;  // Keep consistent positioning
   buttonY2 = height * 0.04; // Keep consistent positioning
-  buttonX0 = buttonX2*0.65;
+  buttonX0 = buttonX2*0.75;
   buttonY0 = buttonY2*0.65;
 
   muteButton.size(buttonDiameterMute, buttonDiameterMute);
