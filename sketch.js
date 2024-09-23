@@ -55,6 +55,8 @@ function setup() {
 
   currentMusic = backgroundMusic1;
   currentMusic.play();
+  
+  windowResized();
 }
 
 function draw() {
@@ -159,8 +161,10 @@ function toggleDialog() {
   playInfoButtonSound();
   if (dialogOpen) {
     closeDialog();
+    infoButton.attribute('src', 'materials/images/Info_Button.png');
   } else {
     openDialog();
+    infoButton.attribute('src', 'materials/images/Info_Button B.png');
   }
 }
 
