@@ -206,10 +206,14 @@ function toggleMute() {
   playMuteSound();
   if (isMuted) {
     currentMusic.setVolume(0.5); // Unmute
+    backgroundMusic1.setVolume(0.5); // Unmute
+    backgroundMusic2.setVolume(0.5); // Unmute
     muteButton.html('Mute Music');
     muteButton.attribute('src', 'materials/images/volume_button.png');
   } else {
     currentMusic.setVolume(0.0); // Mute
+    backgroundMusic1.setVolume(0.0); // Mute
+    backgroundMusic2.setVolume(0.0); // Mute
     muteButton.html('Unmute Music');
     muteButton.attribute('src', 'materials/images/volume_button V2.png');
   }
