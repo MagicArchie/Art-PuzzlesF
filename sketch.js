@@ -1,6 +1,5 @@
 let backgroundImage;
-let buttonWidth1 = 200;
-let buttonHeight1 = 80;
+let buttonWidth, buttonHeight;
 let buttonDiameterInfo, buttonDiameterMute;
 let buttonX2, buttonY2, buttonX0, buttonY0, buttonX01, buttonY01;
 let dialogOpen = false;
@@ -16,7 +15,7 @@ let backgroundMusic1;
 let backgroundMusic2;
 let currentMusic;
 
-let LocationS = parseInt(localStorage.getItem('PageL'), 10);
+let locationS = parseInt(localStorage.getItem('PageL'), 10);
 
 function preload() {
   backgroundImage = loadImage('materials/images/Background10.jpg');
@@ -30,8 +29,8 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   
-  buttonWidth1 = width * 0.15;
-  buttonHeight1 = height * 0.08;
+  buttonWidth = width * 0.15;
+  buttonHeight = height * 0.08;
 
   buttonDiameterInfo = min(width, height) * 0.07;
   buttonDiameterMute = min(width, height) * 0.1;
@@ -61,11 +60,11 @@ function setup() {
 function draw() {
   image(backgroundImage, 0, 0, width, height);
   
-  if (![111, 222, 333, 444, 555, 666, 777, 888, 999].includes(LocationS)) {
-    LocationS = 1;
-    localStorage.setItem('PageL', LocationS);
+  if (![111, 222, 333, 444, 555, 666, 777, 888, 999].includes(locationS)) {
+    locationS = 1;
+    localStorage.setItem('PageL', locationS);
   } else {
-    localStorage.setItem('PageL', LocationS);
+    localStorage.setItem('PageL', locationS);
   }
 
   textSize(width * 0.07);
@@ -79,23 +78,23 @@ function draw() {
   fill(255);
   text('Press the button below to get started..', width / 2, height * 0.50);
 
-  let buttonX = width / 2 - buttonWidth1 / 2;
+  let buttonX = width / 2 - buttonWidth / 2;
   let buttonY = height * 0.65;
   
   // Draw rectangular continue button with more rounded corners
-  if (mouseX > buttonX && mouseX < buttonX + buttonWidth1 && mouseY > buttonY && mouseY < buttonY + buttonHeight1) {
+  if (mouseX > buttonX && mouseX < buttonX + buttonWidth && mouseY > buttonY && mouseY < buttonY + buttonHeight) {
     fill(90, 90, 90, 190);
   } else {
     fill(130, 130, 130, 190);
   }
   
-  rect(buttonX, buttonY, buttonWidth1, buttonHeight1, 50);  // Increased corner radius to 50
+  rect(buttonX, buttonY, buttonWidth, buttonHeight, 50);  // Increased corner radius to 50
 
   textSize(width * 0.02);
-  fill(mouseX > buttonX && mouseX < buttonX + buttonWidth1 && mouseY > buttonY && mouseY < buttonY + buttonHeight1 ? 200 : 255);
+  fill(mouseX > buttonX && mouseX < buttonX + buttonWidth && mouseY > buttonY && mouseY < buttonY + buttonHeight ? 200 : 255);
   stroke(1);
   strokeWeight(4);
-  text('Continue', width / 2, buttonY + buttonHeight1 / 2);
+  text('Continue', width / 2, buttonY + buttonHeight / 2);
   
   if (!currentMusic.isPlaying()) {
     currentMusic = currentMusic == backgroundMusic1 ? backgroundMusic2 : backgroundMusic1;
@@ -106,16 +105,16 @@ function draw() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 
-  buttonWidth1 = width * 0.15;
-  buttonHeight1 = height * 0.1;
+  buttonWidth = width * 0.15;
+  buttonHeight = height * 0.1;
 
   buttonDiameterInfo = min(width, height) * 0.07;
   buttonDiameterMute = min(width, height) * 0.1;
   
-  buttonX2 = width * 0.04;  // Keep consistent positioning
+  button X2 = width * 0.04;  // Keep consistent positioning
   buttonY2 = height * 0.04; // Keep consistent positioning
-  buttonX0 = buttonX2*0.75;
-  buttonY0 = buttonY2*0.65;
+  buttonX0 = buttonX2 * 0.75;
+  buttonY0 = buttonY2 * 0.65;
 
   muteButton.size(buttonDiameterMute, buttonDiameterMute);
   muteButton.position(buttonX0, buttonY0);
@@ -126,6 +125,37 @@ function windowResized() {
   infoButton.position(buttonX2, buttonY2 + buttonDiameterMute + 20);  
 }
 
+function mousePressed() {
+  let buttonX = width / 2 - buttonWidth / 2;
+  let buttonY = height * 0.65;
+  if (mouseX > buttonX && mouseX < buttonX + buttonWidth && mouseY > buttonY && mouseY < buttonY + buttonHeight) {
+    console.log('Continue Button clicked!');
+    continueButtonSound.setVolume(0.5);
+    continueButtonSound.play();
+    setTimeout(function () {
+      goToMainPage();
+    }, 1000);  // Reduced delay to 1 second for better user experience
+  }
+}
+
+function goToMainPage() {
+  const pages = {
+    111: "Stage_Selection/STG_S1/index.html",
+    222: "Stage_Selection/STG_S2/index.html",
+    333: "Stage_Selection/STG_S3/index.html",
+    444: "Stage_Selection/STG_S4/index.html",
+    555: "Stage_Selection/STG_S5/index.html",
+    666: "Stage_Selection/STG_S6/index.html",
+    777: "Stage_Selection/STG_S7/index.html",
+    888: "Stage_Selection/STG_Ss/index.html",
+    999: "Stage_Selection/STG_Sf/index.html",
+    default: "Stage_Selection/STG_S1/index.html",
+  };
+
+  window.location.href = pages[locationS] || pages.default;
+}
+
+// Dialog functions
 function toggleDialog() {
   playInfoButtonSound();
   if (dialogOpen) {
@@ -162,6 +192,17 @@ function closeDialog() {
   dialogOpen = false;
 }
 
+// Sound functions
+function playMuteSound() {
+  muteSound.setVolume(0.3);
+  muteSound.play();
+}
+
+function playInfoButtonSound() {
+  infoButtonSound.setVolume(0.5);
+  infoButtonSound.play();
+}
+
 function toggleMute() {
   playMuteSound();
   if (isMuted) {
@@ -174,14 +215,4 @@ function toggleMute() {
     muteButton.attribute('src', 'materials/images/volume_button V2.png');
   }
   isMuted = !isMuted;
-}
-
-function playMuteSound() {
-  muteSound.setVolume(0.3);
-  muteSound.play();
-}
-
-function playInfoButtonSound() {
-  infoButtonSound.setVolume(0.5);
-  infoButtonSound.play();
 }
