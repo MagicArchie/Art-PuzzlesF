@@ -111,18 +111,17 @@ function windowResized() {
   buttonDiameterInfo = min(width, height) * 0.07;
   buttonDiameterMute = min(width, height) * 0.1;
   
-  buttonX2 = width * 0.04;  // Keep consistent positioning
-  buttonY2 = height * 0.04; // Keep consistent positioning
+  buttonX2 = width * 0.04;  // Keep consistent positioning buttonY2 = height * 0.04; // Keep consistent positioning
   buttonX0 = buttonX2 * 0.75;
   buttonY0 = buttonY2 * 0.65;
 
   muteButton.size(buttonDiameterMute, buttonDiameterMute);
-  muteButton.position(buttonX0, buttonY0);
+  muteButton.position(buttonX2, buttonY2);
 
   infoButton.size(buttonDiameterInfo, buttonDiameterInfo);
   
-  // Ensure info button is positioned below the mute button
-  infoButton.position(buttonX2, buttonY2 + buttonDiameterMute + 20);  
+  // Ensure info button is positioned below the mute button and centered
+  infoButton.position(buttonX2 - (buttonDiameterInfo - buttonDiameterMute) / 2, buttonY2 + buttonDiameterMute + 20);  
 }
 
 function mousePressed() {
