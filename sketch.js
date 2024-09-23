@@ -111,7 +111,7 @@ function windowResized() {
   buttonDiameterInfo = min(width, height) * 0.07;
   buttonDiameterMute = min(width, height) * 0.1;
   
-  button X2 = width * 0.04;  // Keep consistent positioning
+  buttonX2 = width * 0.04;  // Keep consistent positioning
   buttonY2 = height * 0.04; // Keep consistent positioning
   buttonX0 = buttonX2 * 0.75;
   buttonY0 = buttonY2 * 0.65;
