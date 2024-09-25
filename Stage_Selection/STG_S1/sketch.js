@@ -170,9 +170,9 @@ function draw() {
   
   // Calculate the positions of the rectangles based on the new screen size
   let rect1X = 55;
-  let rect1Y = -50; // 5% from the top
+  let rect1Y = -55; // 5% from the top
   let rect1Width = 110;
-  let rect1Height = height * 0.21; // 25% of the height
+  let rect1Height = height * 0.35; // 25% of the height
   
   let rect2X = width / 2;
   let rect2Y = height * 0.07; // 10% from the top
