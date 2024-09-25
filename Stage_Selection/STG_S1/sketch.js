@@ -5,7 +5,7 @@ let nodeGraphics = [];
 let currentHoveredNode = -1;
 const stageCount = 7; // Change the number of stages
 const stages = [];
-const nodeRadius = 65;
+let  nodeRadius = 65;
 let marginX;
 let score = 0; 
 
@@ -80,7 +80,7 @@ function setup() {
   
   Restart = createImg("materials/images/RstBt.png", "resetButton");
   Restart.size(70, 70);
-  Restart.position(25, 110);
+  Restart.position(20, 110);
   Restart.mousePressed(progressR);
   
   Return = createImg("materials/images/Rt_Button.png", "resetButton");
@@ -91,21 +91,27 @@ function setup() {
   backgroundMusic.setVolume(0.7);
 
   // Initialize stages with adjusted random heights
-  for (let i = 0; i < stageCount; i++) {
-    let nodeGraphic = createGraphics(nodeRadius * 2, nodeRadius * 2);
-    nodeGraphic.image(nodeImages[i], 0, 0, nodeRadius * 2, nodeRadius * 2);
-    nodeGraphics.push(nodeGraphic);
+for (let i = 0; i < stageCount; i++) {
+  let nodeGraphic = createGraphics(nodeRadius * 2, nodeRadius * 2);
+  nodeGraphic.image(nodeImages[i], 0, 0, nodeRadius * 2, nodeRadius * 2);
+  nodeGraphics.push(nodeGraphic);
 
-    stages.push({
-      label: i + 1, // Display only the stage number
-      link: nodeLinks[i], // Update the link for each stage
-      y: random(height * 0.4, height * 0.8), // Adjusted random height between 40% and 80% of canvas height
-      x: marginX * (i + 1), // Distribute nodes evenly from left to right
-      interactive: i === 0 // Set interactivity to true for the first node, false for others
-    });
-  }
+  // Limit the y value to a certain range (e.g. between 200 and 600)
+  let minY = 500;
+  let maxY = 800;
+  let y = random(minY, maxY);
+
+  stages.push({
+    label: i + 1, // Display only the stage number
+    link: nodeLinks[i], // Update the link for each stage
+    y: y, // Use the limited y value
+    x: marginX * (i + 1), // Distribute nodes evenly from left to right
+    interactive: i === 0 // Set interactivity to true for the first node, false for others
+  });
+}
 
   noLoop();
+  windowResized();
 }
 
 function progressR() {
@@ -162,30 +168,49 @@ function drawSkillTree() {
 function draw() {
   background(Bg_Img);
   
-  fill(290, 120);
-  strokeWeight(2);
-  rect(15, 10, 90, 190, 130);
+  // Calculate the positions of the rectangles based on the new screen size
+  let rect1X = 62;
+  let rect1Y = -50; // 5% from the top
+  let rect1Width = 110;
+  let rect1Height = height * 0.21; // 25% of the height
+  
+  let rect2X = width / 2;
+  let rect2Y = height * 0.07; // 10% from the top
+  let rect2Width = width * 0.2; // 30% of the width
+  let rect2Height = height * 0.07; // 10% of the height
+  
+  // Calculate the text size as a percentage of the rectangle's height
+  let textSizeValue = rect2Height * 0.5; // 50% of the height
+  
+  // Calculate the size and position of the buttons based on the window size
+  let buttonSize = Math.min(width, height) / 15;
+  Restart.size(buttonSize /1.2, buttonSize / 1.2);
+  Restart.position(75, 45 + buttonSize);
 
+  Return.size(buttonSize, buttonSize);
+  Return.position(70, 20);
+  
+  // Draw the rectangles
+  fill(290, 120);
+  strokeWeight(3);
+  rect(rect1X, rect1Y, rect1Width, rect1Height, 130);
+  
+  fill(255, 150);
+  strokeWeight(3);
+  rectMode(CENTER);
+  rect(rect2X, rect2Y, rect2Width, rect2Height, 130);
+  
   //textFont('Granesta', 100);
   if (ProgressL > LocationS) {
     LocationS = ProgressL;
     localStorage.setItem('PageL', LocationS); 
   }
 
-  // Draw the return button
-  image(returnButtonImage, returnButtonX, returnButtonY, returnButtonSize, returnButtonSize);
-
-  // Draw a rectangle behind the score text
-  fill(255, 150);
-  strokeWeight(3);
-  rectMode(CENTER);
-  rect(width / 2, 60, 300, 70, 130);
-
   // Draw score text
   fill(0);
-  textSize(35);
+  textSize(textSizeValue);
   textStyle(BOLD);
-  text(`Score: ${score}`, width / 2, 60);
+  text(`Score: ${score}`, rect2X, rect2Y);
 
   // Draw the skill tree
   drawSkillTree();
@@ -281,5 +306,38 @@ function keyPressed() {
     } else {
       console.log("Invalid code. No redirection.");
     }
+  }
+}
+
+function windowResized() {
+  
+  // Update the size and position of the buttons based on the new window size
+  let buttonSize = Math.min(width, height) / 20;
+  Restart.size(buttonSize, buttonSize);
+  Restart.position(25, 25 + buttonSize);
+
+  Return.size(buttonSize, buttonSize);
+  Return.position(20, 20);
+  
+  resizeCanvas(windowWidth, windowHeight);
+  marginX = width / (stageCount + 1);
+
+  // Update the node radius based on the new window size
+  nodeRadius = Math.min(width, height) / (stageCount + 1) * 0.5;
+
+  // Update the positions of the skill tree
+  for (let i = 0; i < stages.length; i++) {
+    stages[i].x = marginX * (i + 1);
+    // Limit the y value to a certain range (e.g. between 200 and 600)
+    let minY = 200;
+    let maxY = height - 200; // Leave some space at the bottom
+    stages[i].y = constrain(stages[i].y, minY, maxY);
+  }
+
+  // Update the size of the node graphics
+  for (let i = 0; i < nodeGraphics.length; i++) {
+    const nodeGraphic = createGraphics(nodeRadius * 2, nodeRadius * 2);
+    nodeGraphic.image(nodeImages[i], 0, 0, nodeRadius * 2, nodeRadius * 2);
+    nodeGraphics[i] = nodeGraphic;
   }
 }
