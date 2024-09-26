@@ -180,8 +180,8 @@ function draw() {
   
   // Calculate the positions of the rectangles based on the new screen size
   let rect1X = 60;
-  let rect1Y = -55; // 5% from the top
-  let rect1Width = 110;
+  let rect1Y = -65; // 5% from the top
+  let rect1Width = width *0.05;
   let rect1Height = height * 0.30; // 25% of the height
   
   let rect2X = width / 2;
@@ -194,6 +194,7 @@ function draw() {
   
   // Calculate the size and position of the buttons based on the window size
   let buttonSize = Math.min(width, height) / 12;
+  rect1Width = buttonSize + 20;
   Restart.size(buttonSize /1.2, buttonSize / 1.2);
   Restart.position(75, 45 + buttonSize);
 
