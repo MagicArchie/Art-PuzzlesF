@@ -151,7 +151,7 @@ function drawSkillTree() {
     const nextX = stages[i + 1].x;
     const nextY = stages[i + 1].y;
 
-    if (i <= 2) {
+    if (i <= 1) {
       // Make the first line a different color
       stroke(255); // White color
     } else {
