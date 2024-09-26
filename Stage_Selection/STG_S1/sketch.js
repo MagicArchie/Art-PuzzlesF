@@ -98,7 +98,7 @@ for (let i = 0; i < stageCount; i++) {
 
   // Limit the y value to a certain range (e.g. between 200 and 600)
   let minY = 500;
-  let maxY = 200;
+  let maxY = 850;
   let y = random(minY, maxY);
 
   stages.push({
