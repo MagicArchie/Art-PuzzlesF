@@ -86,6 +86,7 @@ function setup() {
   Return = createImg("materials/images/Rt_Button.png", "resetButton");
   Return.size(80, 80);
   Return.position(20, 20);
+  Return.mousePressed(returnF);
   
   backgroundMusic.loop();
   backgroundMusic.setVolume(0.7);
@@ -115,12 +116,21 @@ for (let i = 0; i < stageCount; i++) {
 }
 
 function progressR() {
+  Restart.attribute('src', 'materials/images/RstBtB.png');
   clickedRs.setVolume(0.1);
   clickedRs.play();
   localStorage.clear();
   setTimeout(function () {
     window.location.href = "../../index.html";
   }, 400);
+}
+
+function returnF(){
+  Return.attribute('src', 'materials/images/Rt_ButtonB.png');
+  homeButtonSound.play();
+  setTimeout(function () {
+    window.location.href = "../../index.html";
+  }, 500);
 }
 
 function drawSkillTree() {
@@ -223,11 +233,7 @@ function mouseClicked() {
     mouseY > returnButtonY &&
     mouseY < returnButtonY + returnButtonSize
   ) {
-    homeButtonSound.play();
-    setTimeout(function () {
-      window.location.href = "../../index.html";
-  }, 500);
-    
+    //...
   } else {
     for (let i = 0; i < stages.length; i++) {
       const x = stages[i].x;
