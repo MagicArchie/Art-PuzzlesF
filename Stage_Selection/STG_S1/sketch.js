@@ -172,7 +172,7 @@ function draw() {
   let rect1X = 60;
   let rect1Y = -55; // 5% from the top
   let rect1Width = 110;
-  let rect1Height = height * 0.4; // 25% of the height
+  let rect1Height = height * 0.25; // 25% of the height
   
   let rect2X = width / 2;
   let rect2Y = height * 0.07; // 10% from the top
