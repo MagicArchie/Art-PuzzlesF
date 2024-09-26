@@ -134,20 +134,10 @@ function returnF(){
 }
 
 function drawSkillTree() {
+  // Draw the lines first
   for (let i = 0; i < stages.length - 1; i++) {
     const x = stages[i].x;
     const y = stages[i].y;
-
-    const isMouseOver = dist(mouseX, mouseY, x, y) < nodeRadius;
-
-    // Change the appearance based on mouse hover and interactivity
-    if (isMouseOver && stages[i].interactive) {
-      currentHoveredNode = i;
-      image(nodeGraphics[i], x - nodeRadius, y - nodeRadius);
-    } else {
-      currentHoveredNode = -1;
-      image(nodeGraphics[i], x - nodeRadius, y - nodeRadius);
-    }
 
     const nextX = stages[i + 1].x;
     const nextY = stages[i + 1].y;
@@ -169,10 +159,22 @@ function drawSkillTree() {
     strokeWeight(1);
   }
 
-  const lastNode = stages[stages.length - 1];
-  const lastX = lastNode.x;
-  const lastY = lastNode.y;
-  image(nodeGraphics[stages.length - 1], lastX - nodeRadius, lastY - nodeRadius);
+  // Draw the images on top of the lines
+  for (let i = 0; i < stages.length; i++) {
+    const x = stages[i].x;
+    const y = stages[i].y;
+
+    const isMouseOver = dist(mouseX, mouseY, x, y) < nodeRadius;
+
+    // Change the appearance based on mouse hover and interactivity
+    if (isMouseOver && stages[i].interactive) {
+      currentHoveredNode = i;
+      image(nodeGraphics[i], x - nodeRadius, y - nodeRadius);
+    } else {
+      currentHoveredNode = -1;
+      image(nodeGraphics[i], x - nodeRadius, y - nodeRadius);
+    }
+  }
 }
 
 function draw() {
