@@ -97,8 +97,8 @@ for (let i = 0; i < stageCount; i++) {
   nodeGraphics.push(nodeGraphic);
 
   // Limit the y value to a certain range (e.g. between 200 and 600)
-  let minY = height * 0.7;
-  let maxY = height * 1.05;
+  let minY = height * 0.6;
+  let maxY = height * 0.95;
   let y = random(minY, maxY);
 
   stages.push({
@@ -172,7 +172,7 @@ function draw() {
   let rect1X = 60;
   let rect1Y = -55; // 5% from the top
   let rect1Width = 110;
-  let rect1Height = height * 0.25; // 25% of the height
+  let rect1Height = height * 0.30; // 25% of the height
   
   let rect2X = width / 2;
   let rect2Y = height * 0.07; // 10% from the top
