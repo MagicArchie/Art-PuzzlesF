@@ -134,7 +134,6 @@ function returnF(){
 }
 
 function drawSkillTree() {
-  // Draw the lines first
   for (let i = 0; i < stages.length - 1; i++) {
     const x = stages[i].x;
     const y = stages[i].y;
@@ -142,27 +141,16 @@ function drawSkillTree() {
     const nextX = stages[i + 1].x;
     const nextY = stages[i + 1].y;
 
-    if (i === 0) {
-      // Make the first line a different color
-      stroke(255); // white color
-    } else {
-      stroke(0); // Black color for all other lines
-    }
+    stroke(0); // Set the line color to black
+    strokeWeight(5);
 
     const lineStartX = x + nodeRadius * cos(atan2(nextY - y, nextX - x));
     const lineStartY = y + nodeRadius * sin(atan2(nextY - y, nextX - x));
     const lineEndX = nextX - nodeRadius * cos(atan2(nextY - y, nextX - x));
     const lineEndY = nextY - nodeRadius * sin(atan2(nextY - y, nextX - x));
 
-    strokeWeight(5);
     line(lineStartX, lineStartY, lineEndX, lineEndY);
     strokeWeight(1);
-  }
-
-  // Draw the images on top of the lines
-  for (let i = 0; i < stages.length; i++) {
-    const x = stages[i].x;
-    const y = stages[i].y;
 
     const isMouseOver = dist(mouseX, mouseY, x, y) < nodeRadius;
 
@@ -175,6 +163,11 @@ function drawSkillTree() {
       image(nodeGraphics[i], x - nodeRadius, y - nodeRadius);
     }
   }
+
+  const lastNode = stages[stages.length - 1];
+  const lastX = lastNode.x;
+  const lastY = lastNode.y;
+  image(nodeGraphics[stages.length - 1], lastX - nodeRadius, lastY - nodeRadius);
 }
 
 function draw() {
