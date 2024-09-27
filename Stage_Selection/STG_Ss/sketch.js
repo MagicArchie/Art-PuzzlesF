@@ -134,28 +134,36 @@ function setup() {
     let nodeGraphic = createGraphics(nodeRadius * 2, nodeRadius * 2);
     nodeGraphic.image(nodeImages[i], 0, 0, nodeRadius * 2, nodeRadius * 2);
     nodeGraphics.push(nodeGraphic);
-    
+
     // Limit the y value to a certain range
     let minY = height * 0.6;
     let maxY = height * 0.95;
-    let y = random(minY, maxY);
+    let y;
+
+    // Special case for the 4th stage
+    if (i === 3) {
+      minY = height * 0.45; // Adjust the minimum y-position to be a bit lower
+      maxY = height * 0.65; // Adjust the maximum y-position to be a bit lower
+    }
+
+    y = random(minY, maxY);
 
     stages.push({
       label: i + 1,
       link: nodeLinks[i],
-      y: y, // Use the limited y valueand 80% of canvas height
+      y: y, // Use the limited y value
       x: marginX * (i + 1),
       interactive: true
     });
   }
-
+  
   // Position the secret button
   secretButtonX = random(secretButtonSize, width - secretButtonSize);
   secretButtonY = random(secretButtonSize, height - secretButtonSize);
 
   // Create the input field
   input = createInput();
-  input.size(200, 30); // Set a fixed width for the input field
+  input.size(140, 30); // Set a fixed width for the input field
 
   // Center the input field horizontally at the bottom of the screen
   const inputX = (width - input.width) / 2;
@@ -235,7 +243,7 @@ function draw() {
   background(Bg_Img);
   
   // Update the position of the input field
-  const inputX = (width - input.width) / 2;
+  const inputX = (width - input.width) / 1.97;
   input.position(inputX, height * 0.62);
   
   // Calculate the positions of the rectangles based on the new screen size
@@ -556,10 +564,22 @@ function windowResized() {
   // Update the positions of the skill tree
   for (let i = 0; i < stages.length; i++) {
     stages[i].x = marginX * (i + 1);
-    // Limit the y value to a certain range (e.g. between 200 and 600)
-    let minY = 200;
-    let maxY = height - 200; // Leave some space at the bottom
-    stages[i].y = constrain(stages[i].y, minY, maxY);
+    // Limit the y value to a certain range
+    let minY = height * 0.6;
+    let maxY = height * 0.95;
+    let y;
+
+    // Special case for the 4th stage
+    if (i === 3) {
+      minY = height * 0.45; // Adjust the minimum y-position to be a bit lower
+      maxY = height * 0.65; // Adjust the maximum y-position to be a bit lower
+    } else {
+      minY = height * 0.2; // Use the original minimum y-position for other stages
+      maxY = height * 0.8; // Use the original maximum y-position for other stages
+    }
+
+    y = constrain(stages[i].y, minY, maxY);
+    stages[i].y = y;
   }
 
   // Update the size of the node graphics
