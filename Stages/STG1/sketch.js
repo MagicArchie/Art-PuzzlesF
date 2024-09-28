@@ -327,10 +327,10 @@ function draw() {
   rect((canvasWidth - 1000) / 2, 470, 1000, 190, 20);
 
   fill(255, 120);
-  rect(1260 + 10, -30, 80, 310, 30);
-
+  rect(width * 0.91, -30, width * 0.06, height * 0.35, 30); // Update the width and height of the rectangle to match the canvas size
+  
   fill(210);
-  rect(1260, -30, 100, 140, 15);
+  rect(width * 0.90, -30, width * 0.08, height * 0.16, 15); // Update the width and height of the rectangle to match the canvas size
 
   fill(235, 131, 52, 30);
   rect(0, 0, width * 0.11, height);
