@@ -333,7 +333,7 @@ function draw() {
   rect(1260, -30, 100, 140, 15);
 
   fill(235, 131, 52, 30);
-  rect(0, 0, 150, canvasHeight);
+  rect(0, 0, 150, height);
 
   if (score == 45) {
     if (!oneUse2) {
