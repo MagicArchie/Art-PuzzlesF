@@ -24,12 +24,6 @@ function preload() {
   continueButtonSound = loadSound('materials/sounds/interface5.mp3');
   backgroundMusic1 = loadSound('materials/sounds/Welcome-Page-F1.mp3');
   backgroundMusic2 = loadSound('materials/sounds/Welcome-Page-F2.mp3');
-  
-  // Preload images
-  muteButtonImage = loadImage('materials/images/volume_button.png');
-  muteButtonImageV2 = loadImage('materials/images/volume_button V2.png');
-  infoButtonImage = loadImage('materials/images/Info_Button.png');
-  infoButtonImageB = loadImage('materials/images/Info_Button B.png');
 }
 
 function setup() {
@@ -44,12 +38,12 @@ function setup() {
   buttonX2 = width * 0.05;  // Positioned 5% from the left
   buttonY2 = height * 0.05; // Positioned 5% from the top
 
-  muteButton = createImg('muteButtonImage', 'Mute Music');
+  muteButton = createImg('materials/images/volume_button.png', 'Mute Music');
   muteButton.size(buttonDiameterMute, buttonDiameterMute);
   muteButton.position(buttonX2, buttonY2);
   muteButton.mousePressed(toggleMute);
 
-  infoButton = createImg('infoButtonImage', 'info-button');
+  infoButton = createImg('materials/images/Info_Button.png', 'info-button');
   infoButton.size(buttonDiameterInfo, buttonDiameterInfo);
   
   // Place info button below the mute button with adequate spacing
