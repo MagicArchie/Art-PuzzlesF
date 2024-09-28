@@ -123,8 +123,10 @@ function setup() {
   Return.position(20, 20);
   Return.mousePressed(returnF);
   
-  suddenAppearance.setVolume(0.09);
-  suddenAppearance.play();
+  setTimeout(function () {
+    suddenAppearance.setVolume(0.09);
+    suddenAppearance.play();
+  }, 100);
   
   backgroundMusic.loop();
   backgroundMusic.setVolume(0.7);
