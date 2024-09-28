@@ -348,7 +348,7 @@ function draw() {
   }else{
   fill(255, 50);
   }
-  rect(25, 85, 100, 100, 30);
+  rect(width * 0.02, height * 0.1, width * 0.05, width * 0.05, 30); // Update the width and height of the rectangle to match the canvas size
 
   // Check if the image is visible, then draw the appropriate image
   if (visibility[counter]) {
