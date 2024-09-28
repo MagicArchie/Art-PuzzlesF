@@ -321,7 +321,7 @@ function draw() {
   let rectX1 = (width - rectWidth1) / 2;
   
   fill(200, 50);
-  rect(rectX1, height * 0.8, rectWidth1, height * 0.1, 300); // Update the width and height of the rectangle to match the canvas size
+  rect(rectX1, height * 0.85, rectWidth1, height * 0.1, 300); // Update the width and height of the rectangle to match the canvas size
 
   fill(25);
   rect(250, 110, 900, 300);
@@ -330,7 +330,7 @@ function draw() {
   let rectX2 = (width - rectWidth2) / 2;
   
   fill(200, 200);
-  rect(rectX2, height * 0.54, rectWidth2, height * 0.2, 20); // Update the width and height of the rectangle to match the canvas size
+  rect(rectX2, height * 0.6, rectWidth2, height * 0.2, 20); // Update the width and height of the rectangle to match the canvas size
 
   fill(255, 120);
   rect(width * 0.91, -30, width * 0.06, height * 0.35, 30); // Update the width and height of the rectangle to match the canvas size
