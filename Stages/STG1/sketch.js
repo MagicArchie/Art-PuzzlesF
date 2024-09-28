@@ -317,14 +317,20 @@ function draw() {
 
   stroke(0);
   strokeWeight(3);
+  let rectWidth1 = width * 0.45;
+  let rectX1 = (width - rectWidth1) / 2;
+  
   fill(200, 50);
-  rect((canvasWidth - 600) / 2, 690, 600, 100, 300);
+  rect(rectX1, height * 0.8, rectWidth1, height * 0.1, 300); // Update the width and height of the rectangle to match the canvas size
 
   fill(25);
   rect(250, 110, 900, 300);
 
+  let rectWidth2 = width * 0.7;
+  let rectX2 = (width - rectWidth2) / 2;
+  
   fill(200, 200);
-  rect((canvasWidth - 1000) / 2, 470, 1000, 190, 20);
+  rect(rectX2, height * 0.54, rectWidth2, height * 0.2, 20); // Update the width and height of the rectangle to match the canvas size
 
   fill(255, 120);
   rect(width * 0.91, -30, width * 0.06, height * 0.35, 30); // Update the width and height of the rectangle to match the canvas size
