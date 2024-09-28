@@ -5,7 +5,7 @@ let nodeGraphics = [];
 let currentHoveredNode = -1;
 const stageCount = 7; // Change the number of stages
 const stages = [];
-const nodeRadius = 65;
+let nodeRadius = 65;
 let marginX;
 let score = 400;
 
@@ -136,6 +136,7 @@ function setup() {
   Return = createImg("materials/images/Rt_Button.png", "resetButton");
   Return.size(80, 80);
   Return.position(20, 20);
+  Return.mousePressed(returnF);
   //Return.mousePressed(hideComplition);
   Return.hide();
 
@@ -144,13 +145,18 @@ function setup() {
     let nodeGraphic = createGraphics(nodeRadius * 2, nodeRadius * 2);
     nodeGraphic.image(nodeImages[i], 0, 0, nodeRadius * 2, nodeRadius * 2);
     nodeGraphics.push(nodeGraphic);
+    
+    // Limit the y value to a certain range
+    let minY = height * 0.6;
+    let maxY = height * 0.95;
+    let y = random(minY, maxY);
 
     stages.push({
-      label: i + 1,
-      link: nodeLinks[i],
-      y: random(height * 0.4, height * 0.8),
-      x: marginX * (i + 1),
-      interactive: true
+      label: i + 1, // Display only the stage number
+      link: nodeLinks[i], // Update the link for each stage
+      y: y, // Use the limited y valueand 80% of canvas height
+      x: marginX * (i + 1), // Distribute nodes evenly from left to right
+      interactive: true // Set interactivity to true for all nodes
     });
   }
   
@@ -177,6 +183,7 @@ function setup() {
 
   
   noLoop();
+  windowResized();
 }
 
 function hideComplition() {
@@ -204,21 +211,19 @@ function progressR() {
   }, 400);
 }
 
+function returnF(){
+  Return.attribute('src', 'materials/images/Rt_ButtonB.png');
+  homeButtonSound.play();
+  setTimeout(function () {
+    window.location.href = "../../index.html";
+  }, 500);
+}
+
 function drawSkillTree() {
+  // Draw the lines first
   for (let i = 0; i < stages.length - 1; i++) {
     const x = stages[i].x;
     const y = stages[i].y;
-
-    const isMouseOver = dist(mouseX, mouseY, x, y) < nodeRadius;
-
-    // Change the appearance based on mouse hover and interactivity
-    if (isMouseOver && stages[i].interactive) {
-      currentHoveredNode = i;
-      image(nodeGraphics[i], x - nodeRadius, y - nodeRadius);
-    } else {
-      currentHoveredNode = -1;
-      image(nodeGraphics[i], x - nodeRadius, y - nodeRadius);
-    }
 
     const nextX = stages[i + 1].x;
     const nextY = stages[i + 1].y;
@@ -240,16 +245,62 @@ function drawSkillTree() {
     strokeWeight(1);
   }
 
-  const lastNode = stages[stages.length - 1];
-  const lastX = lastNode.x;
-  const lastY = lastNode.y;
-  image(nodeGraphics[stages.length - 1], lastX - nodeRadius, lastY - nodeRadius);
+  // Draw the images after the lines
+  for (let i = 0; i < stages.length; i++) {
+    const x = stages[i].x;
+    const y = stages[i].y;
+
+    const isMouseOver = dist(mouseX, mouseY, x, y) < nodeRadius;
+
+    // Change the appearance based on mouse hover and interactivity
+    if (isMouseOver && stages[i].interactive) {
+      currentHoveredNode = i;
+      image(nodeGraphics[i], x - nodeRadius, y - nodeRadius);
+    } else {
+      currentHoveredNode = -1;
+      image(nodeGraphics[i], x - nodeRadius, y - nodeRadius);
+    }
+  }
 }
 
 function draw() {
   background(Bg_Img);
+  
   youWin.setVolume(0.1);
   youWin.play();
+  
+  // Calculate the positions of the rectangles based on the new screen size
+  let rect1X = 60;
+  let rect1Y = -65; // 5% from the top
+  let rect1Width = width *0.05;
+  let rect1Height = height * 0.28; // 25% of the height
+  
+  let rect2X = width / 2;
+  let rect2Y = height * 0.07; // 10% from the top
+  let rect2Width = width * 0.2; // 30% of the width
+  let rect2Height = height * 0.07; // 10% of the height
+  
+  // Calculate the text size as a percentage of the rectangle's height
+  let textSizeValue = rect2Height * 0.5; // 50% of the height
+  
+  // Calculate the size and position of the buttons based on the window size
+  let buttonSize = Math.min(width, height) / 12;
+  rect1Width = buttonSize + 20;
+  Restart.size(buttonSize /1.2, buttonSize / 1.2);
+  Restart.position(75, 45 + buttonSize);
+
+  Return.size(buttonSize, buttonSize);
+  Return.position(70, 20);
+  
+  // Draw the rectangles
+  fill(290, 120);
+  strokeWeight(3);
+  rect(rect1X, rect1Y, rect1Width, rect1Height, 130);
+  
+  fill(255, 150);
+  strokeWeight(3);
+  rectMode(CENTER);
+  rect(rect2X, rect2Y, rect2Width, rect2Height, 130);
 
   //textFont('Granesta', 100);
   if (ProgressL > LocationS) {
@@ -262,24 +313,11 @@ function draw() {
     oneUse = true;
   }
 
-  // Draw the return button
-  image(returnButtonImage, returnButtonX, returnButtonY, returnButtonSize, returnButtonSize);
-
-  fill(290, 120);
-  strokeWeight(2);
-  rect(15, 10, 90, 190, 130);
-  
-  // Draw a rectangle behind the score text
-  fill(255, 150);
-  strokeWeight(3);
-  rectMode(CENTER);
-  rect(width / 2, 60, 300, 70, 130);
-
   // Draw score text
   fill(0);
-  textSize(35);
+  textSize(textSizeValue);
   textStyle(BOLD);
-  text(`Score: ${score}`, width / 2, 60);
+  text(`Score: ${score}`, rect2X, rect2Y);
 
   // Draw the skill tree
   drawSkillTree();
@@ -314,6 +352,9 @@ function placeSecretButton() {
 
   while (isOverlapping) {
     isOverlapping = false;
+
+    // Update the secret button size based on the node radius
+    secretButtonSize = nodeRadius * 2.1;
 
     // Move the secret button to a new random position
     secretButtonX = random(secretButtonSize + 50, width - secretButtonSize - 50);
@@ -353,6 +394,7 @@ function placeSecretButton() {
   }
 
   // Draw the secret button at the final position
+  secretButton.size(secretButtonSize, secretButtonSize);
   secretButton.position(secretButtonX, secretButtonY);
 }
 
@@ -364,11 +406,7 @@ function mouseClicked() {
     mouseY < returnButtonY + returnButtonSize &&
     Comp == false
   ) {
-    homeButtonSound.play();
-
-    setTimeout(function () {
-      window.location.href = "../../index.html";
-    }, 500);
+    //...
   } else {
     if (CodeCheckc == false) {
       // Check if the secret button is clicked
@@ -526,4 +564,65 @@ function keyPressed() {
       console.log("Invalid code. No redirection.");
     }
   }
+}
+
+function windowResized() {
+  
+  // Update the position of the input field
+  const inputX = (width - input.width) / 2;
+  input.position(inputX, height - 60);
+  
+  // Update the size and position of the buttons based on the new window size
+  let buttonSize = Math.min(width, height) / 20;
+  Restart.size(buttonSize, buttonSize);
+  Restart.position(25, 25 + buttonSize);
+
+  Return.size(buttonSize, buttonSize);
+  Return.position(20, 20);
+  
+  resizeCanvas(windowWidth, windowHeight);
+  marginX = width / (stageCount + 1);
+
+  // Update the node radius based on the new window size
+  nodeRadius = Math.min(width, height) / (stageCount + 1) * 0.5;
+
+  // Update the positions of the skill tree
+  for (let i = 0; i < stages.length; i++) {
+    stages[i].x = marginX * (i + 1);
+    // Limit the y value to a certain range
+    let minY = height * 0.6;
+    let maxY = height * 0.95;
+    let y;
+
+    // Special case for the 4th stage
+    if (i === 3) {
+      minY = height * 0.45; // Adjust the minimum y-position to be a bit lower
+      maxY = height * 0.65; // Adjust the maximum y-position to be a bit lower
+    } else {
+      minY = height * 0.2; // Use the original minimum y-position for other stages
+      maxY = height * 0.8; // Use the original maximum y-position for other stages
+    }
+
+    y = constrain(stages[i].y, minY, maxY);
+    stages[i].y = y;
+  }
+
+  // Update the size of the node graphics
+  for (let i = 0; i < nodeGraphics.length; i++) {
+    const nodeGraphic = createGraphics(nodeRadius * 2, nodeRadius * 2);
+    nodeGraphic.image(nodeImages[i], 0, 0, nodeRadius * 2, nodeRadius * 2);
+    nodeGraphics[i] = nodeGraphic;
+  }
+  
+  // Resize the Background14 image
+  Complete1.size(width, height);
+  
+  // Resize the Completion8 image
+  const originalWidth = 450;
+  const originalHeight = 680;
+  const aspectRatio = originalWidth / originalHeight;
+  const newWidth = Math.min(width, height) * 0.5;
+  const newHeight = newWidth / aspectRatio;
+  Complete2.size(newWidth, newHeight);
+  Complete2.position(width / 2 - Complete2.width / 2, height * 0.07);
 }
