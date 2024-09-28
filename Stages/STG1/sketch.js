@@ -166,7 +166,7 @@ function preload() {
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
-
+  
   nightModeButtonX = canvasWidth - nightModeButtonSize - 53;
   nightModeButtonY = 15;
   zoomButtonX = nightModeButtonX + 10;
@@ -296,6 +296,7 @@ function setup() {
   updateTitle();
 
   backgroundSound.loop();
+  windowResized()
 }
 
 function draw() {
@@ -776,4 +777,58 @@ function displayMessageAndButtons() {
   rect(width / 2 + 20, height / 2 -130, 60, 30, 9);
   fill(0);
   text("No", width / 2 + 50, height / 2 - 112);
+}
+
+function windowResized() {
+  // Update the canvas size to match the new window size
+  resizeCanvas(windowWidth, windowHeight);
+
+  // Update the positions of the elements to match the new canvas size
+  nightModeButtonX = canvasWidth - nightModeButtonSize - 53;
+  nightModeButtonY = 15;
+  zoomButtonX = nightModeButtonX + 10;
+  zoomButtonY = nightModeButtonY + nightModeButtonSize + 30;
+  unzoomButtonX = zoomButtonX;
+  unzoomButtonY = zoomButtonY + buttonSize;
+
+  Audio_ButtonX = 85;
+  Audio_ButtonY = canvasHeight - 62;
+  homeButtonX = 12;
+  homeButtonY = canvasHeight - 75;
+  descriptionButtonX = (canvasWidth - descriptionButtonSize) / 2;
+  descriptionButtonY = 700;
+
+  arrowRightX = descriptionButtonX + descriptionButtonSize + 10;
+  arrowRightY =
+    descriptionButtonY + descriptionButtonSize / 2 - arrowButtonSize / 2;
+  arrowLeftX = descriptionButtonX - arrowButtonSize - 10;
+  arrowLeftY =
+    descriptionButtonY + descriptionButtonSize / 2 - arrowButtonSize / 2;
+
+  returnToFirstButtonX = arrowLeftX - margin;
+  returnToFirstButtonY =
+    descriptionButtonY + descriptionButtonSize / 2 - arrowButtonSize / 2;
+  goToLastButtonX = arrowRightX + margin;
+  goToLastButtonY =
+    descriptionButtonY + descriptionButtonSize / 2 - arrowButtonSize / 2;
+
+  keyButtonX = 15;
+  keyButtonY = 180;
+
+  // Update the positions of the elements
+  nightModeButton.position(nightModeButtonX, nightModeButtonY);
+  zoomButton.position(zoomButtonX, zoomButtonY);
+  unzoomButton.position(unzoomButtonX, unzoomButtonY);
+  Audio_Button.position(Audio_ButtonX, Audio_ButtonY);
+  homeButton.position(homeButtonX, homeButtonY);
+  descriptionButton.position(descriptionButtonX, descriptionButtonY);
+  arrowRight.position(arrowRightX, arrowRightY);
+  arrowLeft.position(arrowLeftX, arrowLeftY);
+  returnToFirstButton.position(returnToFirstButtonX, returnToFirstButtonY);
+  goToLastButton.position(goToLastButtonX, goToLastButtonY);
+  keyimg.position(keyButtonX, keyButtonY);
+
+  // Update the size of the background image
+  backgroundImage.resize(canvasWidth, canvasHeight);
+  backgroundImage2.resize(canvasWidth, canvasHeight);
 }
