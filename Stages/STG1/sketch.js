@@ -798,7 +798,7 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 
   // Update the sizes of the elements
-  Audio_Button.size(windowWidth / 64, windowWidth / 64);
+  Audio_Button.size(windowWidth / 32, windowWidth / 32);
   nightModeButton.size(windowWidth / 48, windowWidth / 48);
   zoomButton.size(buttonSize * windowWidth / 1600, buttonSize * windowWidth / 1600);
   unzoomButton.size(buttonSize * windowWidth / 1600, buttonSize * windowWidth / 1600);
@@ -822,7 +822,7 @@ function windowResized() {
   unzoomButtonY = zoomButtonY + buttonSize * windowWidth / 1600;
 
   Audio_ButtonX = width / 16;
-  Audio_ButtonY = height / 1.08;
+  Audio_ButtonY = (height / 1.066);
   homeButtonX = width / 65;
   homeButtonY = height / 1.08;
   descriptionButtonX = (width - descriptionButton.width) / 2;
