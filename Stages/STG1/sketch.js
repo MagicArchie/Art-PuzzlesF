@@ -208,7 +208,7 @@ function setup() {
   level.position(30, 20);
   level.style("font-size", "32px");
   level.style("color", "#D1D1D1");
-
+  
   Audio_Button = createImg("materials/buttons/Audio_Button.png", "Audio_Button");
   Audio_Button.size(50, 50);
   Audio_Button.position(Audio_ButtonX, Audio_ButtonY);
@@ -354,7 +354,7 @@ function draw() {
   }else{
   fill(255, 50);
   }
-  rect(width * 0.02, height * 0.1, width * 0.05, width * 0.05, 30); // Update the width and height of the rectangle to match the canvas size
+  rect(width * 0.016, height * 0.09, width * 0.075, width * 0.075, 30); // Update the width and height of the rectangle to match the canvas size
 
   // Check if the image is visible, then draw the appropriate image
   if (visibility[counter]) {
@@ -380,12 +380,19 @@ function draw() {
   text(score, 75, 155);
   fill(255);
 
+  let rectWidth3 = width * 0.11;
+  let levelX3 = (width - rectWidth3) / 2;
+  
   title.html(titles[counter]);
   if (oneUse == false) {
-    title.position(400, 20);
+    title.position(width * 0.4, height * 0.05);
     oneUse = true;
   }
   level.html("Level " + (counter + 1));
+  let rectX4 = 0;
+  let rectWidth4 = width * 0.11;
+  let levelX4 = rectX4 + (rectWidth4 / 2);
+  level.position(levelX4, height * 0.1);
 
   // Move the description text towards the target position
   descriptionTextY += (targetDescriptionTextY - descriptionTextY) * 0.1;
@@ -414,6 +421,7 @@ function draw() {
   if (showMessage) {
     displayMessageAndButtons();
   }
+  
 }
 
 function updateImageAndDescription() {
@@ -789,34 +797,50 @@ function windowResized() {
   // Update the canvas size to match the new window size
   resizeCanvas(windowWidth, windowHeight);
 
+  // Update the sizes of the elements
+  Audio_Button.size(windowWidth / 64, windowWidth / 64);
+  nightModeButton.size(windowWidth / 48, windowWidth / 48);
+  zoomButton.size(buttonSize * windowWidth / 1600, buttonSize * windowWidth / 1600);
+  unzoomButton.size(buttonSize * windowWidth / 1600, buttonSize * windowWidth / 1600);
+  returnToFirstButton.size(buttonSize * windowWidth / 1600, buttonSize * windowWidth / 1600);
+  goToLastButton.size(buttonSize * windowWidth / 1600, buttonSize * windowWidth / 1600);
+  homeButton.size(homeButtonSize * windowWidth / 1600, homeButtonSize * windowWidth / 1600);
+  descriptionButton.size(descriptionButtonSize * windowWidth / 1600, descriptionButtonSize * windowWidth / 1600);
+  arrowRight.size(arrowButtonSize * windowWidth / 1600, arrowButtonSize * windowWidth / 1600);
+  arrowLeft.size(arrowButtonSize * windowWidth / 1600, arrowButtonSize * windowWidth / 1600);
+  artistBt.size(artistButtonSize * windowWidth / 1600, artistButtonSize * windowWidth / 1600);
+  keyimg.size(120 * windowWidth / 1600, 250 * windowWidth / 1600);
+  notification.size(300 * windowWidth / 1600, 100 * windowWidth / 1600);
+  Complete.size(450 * windowWidth / 1600, 680 * windowWidth / 1600);
+
   // Update the positions of the elements to match the new canvas size
-  nightModeButtonX = canvasWidth - nightModeButtonSize - 53;
+  nightModeButtonX = canvasWidth - nightModeButton.width - 53;
   nightModeButtonY = 15;
   zoomButtonX = nightModeButtonX + 10;
-  zoomButtonY = nightModeButtonY + nightModeButtonSize + 30;
+  zoomButtonY = nightModeButtonY + nightModeButton.height + 30;
   unzoomButtonX = zoomButtonX;
-  unzoomButtonY = zoomButtonY + buttonSize;
+  unzoomButtonY = zoomButtonY + buttonSize * windowWidth / 1600;
 
-  Audio_ButtonX = 85;
-  Audio_ButtonY = canvasHeight - 62;
-  homeButtonX = 12;
-  homeButtonY = canvasHeight - 75;
-  descriptionButtonX = (canvasWidth - descriptionButtonSize) / 2;
-  descriptionButtonY = 700;
+  Audio_ButtonX = width / 16;
+  Audio_ButtonY = height / 1.08;
+  homeButtonX = width / 65;
+  homeButtonY = height / 1.08;
+  descriptionButtonX = (width - descriptionButton.width) / 2;
+  descriptionButtonY = height / 1.15;
 
-  arrowRightX = descriptionButtonX + descriptionButtonSize + 10;
+  arrowRightX = descriptionButtonX + descriptionButton.width + 10;
   arrowRightY =
-    descriptionButtonY + descriptionButtonSize / 2 - arrowButtonSize / 2;
-  arrowLeftX = descriptionButtonX - arrowButtonSize - 10;
+    descriptionButtonY + descriptionButton.height / 2 - arrowRight.height / 2;
+  arrowLeftX = descriptionButtonX - arrowLeft.width - 10;
   arrowLeftY =
-    descriptionButtonY + descriptionButtonSize / 2 - arrowButtonSize / 2;
+    descriptionButtonY + descriptionButton.height / 2 - arrowLeft.height / 2;
 
   returnToFirstButtonX = arrowLeftX - margin;
   returnToFirstButtonY =
-    descriptionButtonY + descriptionButtonSize / 2 - arrowButtonSize / 2;
+    descriptionButtonY + descriptionButton.height / 2 - returnToFirstButton.height / 2;
   goToLastButtonX = arrowRightX + margin;
   goToLastButtonY =
-    descriptionButtonY + descriptionButtonSize / 2 - arrowButtonSize / 2;
+    descriptionButtonY + descriptionButton.height / 2 - goToLastButton.height / 2;
 
   keyButtonX = 15;
   keyButtonY = 180;
