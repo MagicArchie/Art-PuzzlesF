@@ -317,13 +317,21 @@ function draw() {
   stroke(0);
   strokeWeight(3);
   fill(200, 50);
-  rect((canvasWidth - 600) / 2, 690, 600, 100, 300);
+  
+  let rectWidth1 = width * 0.45;
+  let rectX1 = (width - rectWidth1) / 2;
+  
+  fill(200, 60);
+  rect(rectX1, height * 0.85, rectWidth1, height * 0.1, 300);
 
   fill(25);
   rect(250, 110, 900, 300);
 
+  let rectWidth2 = width * 0.7;
+  let rectX2 = (width - rectWidth2) / 2;
+  
   fill(200, 200);
-  rect((canvasWidth - 1000) / 2, 470, 1000, 190, 20);
+  rect(rectX2, height * 0.6, rectWidth2, height * 0.2, 20);
 
   fill(255, 120);
   rect(1260 + 10, -30, 80, 310, 30);
