@@ -156,6 +156,7 @@ function preload() {
     clickG = loadSound("materials/sounds/mouse-click.mp3");
     choice = loadSound("materials/sounds/tap-notification.mp3");
     transition = loadSound("materials/sounds/transition.wav");
+    light = loadSound("materials/sounds/light-switch-81967.mp3");
 }
 
 function setup() {
@@ -203,7 +204,7 @@ function setup() {
   title.style("color", "#FFFFFF");
   
   level = createSpan("");
-  level.position(30, 20);
+  level.position(30, height * 0.02);
   level.style("font-size", "32px");
   level.style("color", "#D1D1D1");
 
@@ -374,10 +375,11 @@ function draw() {
 
   title.html(titles[counter]);
   if (oneUse == false){
-    title.position((width - (titleWidth1[counter]) / 2)/ 2, height * 0.02);
+    title.position((width - titleWidth1[counter]) / 2, height * 0.02);
     oneUse = true;
   }
   level.html("Level " + (counter + 1));
+  level.position(width * 0.015, height * 0.02);
   
   // Move the description text towards the target position
   descriptionTextY += (targetDescriptionTextY - descriptionTextY) * 0.1;
@@ -421,7 +423,7 @@ function updateTitle() {
   title.html(titles[counter]);
   titleWidth = textWidth(titles[counter]);
   
-  title.position((width - (titleWidth1[counter]) / 2)/ 2, height * 0.02);
+  title.position((width - titleWidth1[counter]) / 2, height * 0.02);
 }
 
 function updateImageAndDescription() {
@@ -590,6 +592,7 @@ function pressedLeft() {
 
 function toggleNightMode() {
   nightMode = !nightMode;
+  light.setVolume(0.1);
   light.play();
 
   if (nightMode) {
