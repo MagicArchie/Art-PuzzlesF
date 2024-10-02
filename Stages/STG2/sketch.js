@@ -340,7 +340,7 @@ function draw() {
   rect(1260, -30, 100, 140, 15);
 
   fill(235, 131, 52, 30);
-  rect(0, 0, 150, 800);
+  rect(-1, -1, width * 0.1, height + 1);
 
   if (score === 30) {
     if (!oneUse2) {
@@ -782,11 +782,15 @@ function displayMessageAndButtons() {
 function windowResized() {
   // Update the canvas size to match the new window size
   resizeCanvas(windowWidth, windowHeight);
+  
+  level.position(width * 0.015, height * 0.02);
+  title.position((width - titleWidth1[counter]) / 2, height * 0.02);
+  
   updateFontSize();
 }
 
 function updateFontSize() {
   let fontSize = height * 0.04;
-  title.style("font-size", height * 0.025 + "px");
-  level.style("font-size", height * 0.025 + "px");
+  title.style("font-size", height * 0.035 + "px");
+  level.style("font-size", height * 0.035 + "px");
 }
