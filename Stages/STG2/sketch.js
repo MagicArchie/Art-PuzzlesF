@@ -374,7 +374,7 @@ function draw() {
 
   title.html(titles[counter]);
   if (oneUse == false){
-    title.position((width - titleWidth1[counter]) / 2, height * 0.02);
+    title.position((width - (titleWidth1[counter]) / 2)/ 2, height * 0.02);
     oneUse = true;
   }
   level.html("Level " + (counter + 1));
@@ -421,7 +421,7 @@ function updateTitle() {
   title.html(titles[counter]);
   titleWidth = textWidth(titles[counter]);
   
-  title.position((width - titleWidth1[counter]) / 2, height * 0.02);
+  title.position((width - (titleWidth1[counter]) / 2)/ 2, height * 0.02);
 }
 
 function updateImageAndDescription() {
