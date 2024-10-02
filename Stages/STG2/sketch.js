@@ -121,6 +121,8 @@ localStorage.setItem('Stage', StageSend);
 let Unlock = parseInt(localStorage.getItem('Complete2'), 10);
 let LocationS = parseInt(localStorage.getItem('PageL'), 10);
 
+let titleWidth1;
+
 function preload() {
   backgroundImage = loadImage("materials/images/Background11.jpg");
   backgroundImage2 = loadImage("materials/notifications/Background1-1.jpg");
@@ -185,6 +187,14 @@ function setup() {
 
   keyButtonX = 15;
   keyButtonY = 180;
+  
+  titleWidth1 = [];
+
+  for (let i = 0; i < titles.length; i++) {
+    titleWidth1.push(textWidth(titles[i]));
+  }
+
+  console.log(titleWidth1);
 
   //textFont("Granesta", 100);
   title = createSpan("");
@@ -284,6 +294,7 @@ function setup() {
   updateTitle();
   
   backgroundSound.loop();
+  windowResized();
 }
 
 function draw() {
@@ -363,7 +374,7 @@ function draw() {
 
   title.html(titles[counter]);
   if (oneUse == false){
-    title.position(613,20);
+    title.position((width - titleWidth1[counter]) / 2, height * 0.02);
     oneUse = true;
   }
   level.html("Level " + (counter + 1));
@@ -381,7 +392,7 @@ function draw() {
       image(backgroundImage2, 0, 0, width, height);
       fill(0, 0, 0, 150);
       noStroke();
-      rect(0, 0, canvasWidth, canvasHeight);
+      rect(0, 0, canvasWidth, canvasHeight); 
     }
     if (!oneUse3) {
         Completed();
@@ -409,8 +420,8 @@ function updateImageAndDescription() {
 function updateTitle() {
   title.html(titles[counter]);
   titleWidth = textWidth(titles[counter]);
-
-  title.position((canvasWidth - titleWidth) / 2, 20);
+  
+  title.position((width - titleWidth1[counter]) / 2, height * 0.02);
 }
 
 function updateImageAndDescription() {
@@ -755,4 +766,9 @@ function displayMessageAndButtons() {
   rect(width / 2 + 20, height / 2 -130, 60, 30, 9);
   fill(0);
   text("No", width / 2 + 50, height / 2 - 112);
+}
+
+function windowResized() {
+  // Update the canvas size to match the new window size
+  resizeCanvas(windowWidth, windowHeight);
 }
