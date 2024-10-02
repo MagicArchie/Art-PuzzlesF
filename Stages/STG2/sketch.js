@@ -782,4 +782,11 @@ function displayMessageAndButtons() {
 function windowResized() {
   // Update the canvas size to match the new window size
   resizeCanvas(windowWidth, windowHeight);
+  updateFontSize();
+}
+
+function updateFontSize() {
+  let fontSize = height * 0.04;
+  title.style("font-size", height * 0.025 + "px");
+  level.style("font-size", height * 0.025 + "px");
 }
