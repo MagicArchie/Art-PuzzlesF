@@ -334,10 +334,11 @@ function draw() {
   rect(rectX2, height * 0.6, rectWidth2, height * 0.2, 20);
 
   fill(255, 120);
-  rect(1260 + 10, -30, 80, 310, 30);
-
+  rect(width * 0.89, -30, width * 0.05, height * 0.35, 30); // Update the width and height of the rectangle to match the canvas size
+  
   fill(210);
-  rect(1260, -30, 100, 140, 15);
+  rect(width * 0.88, -30, width * 0.07, height * 0.15, 15); // Update the width and height of the rectangle to match the canvas size
+
 
   fill(235, 131, 52, 30);
   rect(-1, -1, width * 0.1, height + 1);
