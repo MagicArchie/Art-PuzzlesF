@@ -791,6 +791,19 @@ function windowResized() {
   descriptionButtonX = (width - descriptionButton.width) / 2;
   descriptionButtonY = height / 1.16;
   
+  arrowRightX = descriptionButtonX + descriptionButton.width + 30;
+  arrowRightY =
+    descriptionButtonY + descriptionButton.height / 2 - arrowRight.height / 2;
+  arrowLeftX = descriptionButtonX - arrowLeft.width - 40;
+  arrowLeftY =
+    descriptionButtonY + descriptionButton.height / 2 - arrowLeft.height / 2;
+  
+  returnToFirstButtonX = arrowLeftX - margin;
+  returnToFirstButtonY = descriptionButtonY + descriptionButton.height / 2 - returnToFirstButton.height / 2;
+  goToLastButtonX = arrowRightX + margin;
+  goToLastButtonY =
+    descriptionButtonY + descriptionButton.height / 2 - goToLastButton.height / 2;
+  
   Audio_Button.size(windowWidth / 32, windowWidth / 32);
   Audio_Button.position(Audio_ButtonX, Audio_ButtonY);
   homeButton.size(homeButtonSize * windowWidth / 1600, homeButtonSize * windowWidth / 1600);
@@ -798,6 +811,17 @@ function windowResized() {
   
   descriptionButton.size(descriptionButtonSize * windowWidth / 1800, descriptionButtonSize * windowWidth / 1800);
   descriptionButton.position(descriptionButtonX, descriptionButtonY);
+  
+  arrowRight.size(arrowButtonSize * windowWidth / 1600, arrowButtonSize * windowWidth / 1800);
+  arrowLeft.size(arrowButtonSize * windowWidth / 1600, arrowButtonSize * windowWidth / 1800);
+  arrowRight.position(arrowRightX, arrowRightY);
+  arrowLeft.position(arrowLeftX, arrowLeftY);
+  
+  returnToFirstButton.size(buttonSize * windowWidth / 1600, buttonSize * windowWidth / 1800);
+  goToLastButton.size(buttonSize * windowWidth / 1600, buttonSize * windowWidth / 1800);
+  returnToFirstButton.position(returnToFirstButtonX, returnToFirstButtonY);
+  goToLastButton.position(goToLastButtonX, goToLastButtonY);
+  
   
   level.position(width * 0.022, height * 0.02);
   title.position((width - titleWidth1[counter]) / 2, height * 0.02);
