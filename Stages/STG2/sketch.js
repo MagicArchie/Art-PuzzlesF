@@ -334,10 +334,10 @@ function draw() {
   rect(rectX2, height * 0.6, rectWidth2, height * 0.2, 20);
 
   fill(255, 120);
-  rect(width * 0.89, -30, width * 0.05, height * 0.35, 30); // Update the width and height of the rectangle to match the canvas size
+  rect(width * 0.89, -30, width * 0.05, height * 0.32, 30); // Update the width and height of the rectangle to match the canvas size
   
   fill(210);
-  rect(width * 0.88, -30, width * 0.07, height * 0.15, 15); // Update the width and height of the rectangle to match the canvas size
+  rect(width * 0.88, -30, width * 0.07, height * 0.14, 15); // Update the width and height of the rectangle to match the canvas size
 
 
   fill(235, 131, 52, 30);
@@ -808,6 +808,15 @@ function windowResized() {
   keyButtonX = width * 0.01;
   keyButtonY = height * 0.2;
   
+  nightModeButtonX = (width - nightModeButton.width) * 0.924;
+  nightModeButtonY = height * 0.01;
+  
+  zoomButtonX = nightModeButtonX * 1.009;
+  zoomButtonY = (nightModeButtonY + nightModeButton.height) * 1.65;
+  unzoomButtonX = zoomButtonX;
+  unzoomButtonY = zoomButtonY + buttonSize * windowWidth / 1700;
+  
+  
   Audio_Button.size(windowWidth / 32, windowWidth / 32);
   Audio_Button.position(Audio_ButtonX, Audio_ButtonY);
   homeButton.size(homeButtonSize * windowWidth / 1600, homeButtonSize * windowWidth / 1600);
@@ -828,7 +837,14 @@ function windowResized() {
   
   keyimg.size(120 * windowWidth / 1600, 250 * windowWidth / 1600);
   keyimg.position(keyButtonX, keyButtonY);
-
+  
+  nightModeButton.size(windowWidth / 18, windowWidth / 18);
+  nightModeButton.position(nightModeButtonX, nightModeButtonY);
+  
+  zoomButton.size(buttonSize * windowWidth / 2000, buttonSize * windowWidth / 2000);
+  unzoomButton.size(buttonSize * windowWidth / 2000, buttonSize * windowWidth / 2000);
+  zoomButton.position(zoomButtonX, zoomButtonY);
+  unzoomButton.position(unzoomButtonX, unzoomButtonY);
   
   level.position(width * 0.022, height * 0.02);
   title.position((width - titleWidth1[counter]) / 2, height * 0.02);
