@@ -791,10 +791,10 @@ function windowResized() {
   descriptionButtonX = (width - descriptionButton.width) / 2;
   descriptionButtonY = height / 1.16;
   
-  arrowRightX = descriptionButtonX + descriptionButton.width + 30;
+  arrowRightX = descriptionButtonX + descriptionButton.width + 20;
   arrowRightY =
     descriptionButtonY + descriptionButton.height / 2 - arrowRight.height / 2;
-  arrowLeftX = descriptionButtonX - arrowLeft.width - 40;
+  arrowLeftX = descriptionButtonX - arrowLeft.width - 30;
   arrowLeftY =
     descriptionButtonY + descriptionButton.height / 2 - arrowLeft.height / 2;
   
