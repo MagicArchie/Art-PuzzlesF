@@ -387,7 +387,7 @@ function draw() {
     oneUse = true;
   }
   level.html("Level " + (counter + 1));
-  level.position(width * 0.015, height * 0.02);
+  level.position(width * 0.02, height * 0.02);
   
   // Move the description text towards the target position
   descriptionTextY += (targetDescriptionTextY - descriptionTextY) * 0.1;
@@ -783,7 +783,7 @@ function windowResized() {
   // Update the canvas size to match the new window size
   resizeCanvas(windowWidth, windowHeight);
   
-  level.position(width * 0.015, height * 0.02);
+  level.position(width * 0.02, height * 0.02);
   title.position((width - titleWidth1[counter]) / 2, height * 0.02);
   
   updateFontSize();
