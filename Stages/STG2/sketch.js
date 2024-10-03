@@ -387,7 +387,7 @@ function draw() {
     oneUse = true;
   }
   level.html("Level " + (counter + 1));
-  level.position(width * 0.025, height * 0.02);
+  level.position(width * 0.022, height * 0.02);
   
   // Move the description text towards the target position
   descriptionTextY += (targetDescriptionTextY - descriptionTextY) * 0.1;
@@ -799,7 +799,7 @@ function windowResized() {
   descriptionButton.size(descriptionButtonSize * windowWidth / 1800, descriptionButtonSize * windowWidth / 1800);
   descriptionButton.position(descriptionButtonX, descriptionButtonY);
   
-  level.position(width * 0.025, height * 0.02);
+  level.position(width * 0.022, height * 0.02);
   title.position((width - titleWidth1[counter]) / 2, height * 0.02);
   
   updateFontSize();
