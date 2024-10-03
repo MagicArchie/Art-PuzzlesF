@@ -788,10 +788,16 @@ function windowResized() {
   homeButtonX = width * 0.008;
   homeButtonY = height * 0.915;
   
+  descriptionButtonX = (width - descriptionButton.width) / 2;
+  descriptionButtonY = height / 1.16;
+  
   Audio_Button.size(windowWidth / 32, windowWidth / 32);
   Audio_Button.position(Audio_ButtonX, Audio_ButtonY);
   homeButton.size(homeButtonSize * windowWidth / 1600, homeButtonSize * windowWidth / 1600);
   homeButton.position(homeButtonX, homeButtonY);
+  
+  descriptionButton.size(descriptionButtonSize * windowWidth / 1800, descriptionButtonSize * windowWidth / 1800);
+  descriptionButton.position(descriptionButtonX, descriptionButtonY);
   
   level.position(width * 0.025, height * 0.02);
   title.position((width - titleWidth1[counter]) / 2, height * 0.02);
