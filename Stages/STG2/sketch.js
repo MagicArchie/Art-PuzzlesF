@@ -804,6 +804,9 @@ function windowResized() {
   goToLastButtonY =
     descriptionButtonY + descriptionButton.height / 2 - goToLastButton.height / 2;
   
+  keyButtonX = width * 0.01;
+  keyButtonY = height * 0.2;
+  
   Audio_Button.size(windowWidth / 32, windowWidth / 32);
   Audio_Button.position(Audio_ButtonX, Audio_ButtonY);
   homeButton.size(homeButtonSize * windowWidth / 1600, homeButtonSize * windowWidth / 1600);
@@ -822,6 +825,9 @@ function windowResized() {
   returnToFirstButton.position(returnToFirstButtonX, returnToFirstButtonY);
   goToLastButton.position(goToLastButtonX, goToLastButtonY);
   
+  keyimg.size(120 * windowWidth / 1600, 250 * windowWidth / 1600);
+  keyimg.position(keyButtonX, keyButtonY);
+
   
   level.position(width * 0.022, height * 0.02);
   title.position((width - titleWidth1[counter]) / 2, height * 0.02);
