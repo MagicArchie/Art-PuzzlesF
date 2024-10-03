@@ -387,7 +387,7 @@ function draw() {
     oneUse = true;
   }
   level.html("Level " + (counter + 1));
-  level.position(width * 0.02, height * 0.02);
+  level.position(width * 0.025, height * 0.02);
   
   // Move the description text towards the target position
   descriptionTextY += (targetDescriptionTextY - descriptionTextY) * 0.1;
@@ -783,7 +783,17 @@ function windowResized() {
   // Update the canvas size to match the new window size
   resizeCanvas(windowWidth, windowHeight);
   
-  level.position(width * 0.02, height * 0.02);
+  Audio_ButtonX = width * 0.055;
+  Audio_ButtonY = height * 0.93;
+  homeButtonX = width * 0.008;
+  homeButtonY = height * 0.915;
+  
+  Audio_Button.size(windowWidth / 32, windowWidth / 32);
+  Audio_Button.position(Audio_ButtonX, Audio_ButtonY);
+  homeButton.size(homeButtonSize * windowWidth / 1600, homeButtonSize * windowWidth / 1600);
+  homeButton.position(homeButtonX, homeButtonY);
+  
+  level.position(width * 0.025, height * 0.02);
   title.position((width - titleWidth1[counter]) / 2, height * 0.02);
   
   updateFontSize();
