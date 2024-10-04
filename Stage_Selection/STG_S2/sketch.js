@@ -726,10 +726,10 @@ function mousePressed() {
   if (showMessage) {
     // Check if the mouse is over the "Yes" button
     if (
-      mouseX >= width / 2 - 80 &&
-      mouseX <= width / 2 - 80 + 60 &&
-      mouseY >= height / 2 - 130 &&
-      mouseY <= height / 2 - 100
+      mouseX >= width / 2 - 100 &&
+      mouseX <= width / 2 - 100 + 80 &&
+      mouseY >= height / 3.05 &&
+      mouseY <= height / 3.05 + 40
     ) {
       // Redirect to a new URL when "Yes" is clicked
       clickG.setVolume(0.1);
@@ -747,9 +747,9 @@ function mousePressed() {
     // Check if the mouse is over the "No" button
     else if (
       mouseX >= width / 2 + 20 &&
-      mouseX <= width / 2 + 20 + 60 &&
-      mouseY >= height / 2 - 130 &&
-      mouseY <= height / 2 - 100
+      mouseX <= width / 2 + 20 + 80 &&
+      mouseY >= height / 3.05 &&
+      mouseY <= height / 3.05 + 40
     ) {
       // Reset showMessage to false if "No" is clicked
       clickG.setVolume(0.1);
@@ -773,22 +773,26 @@ function mousePressed() {
 }
 
 function displayMessageAndButtons() {
-  textSize(24);
+  fill(255, 40);
+  stroke(2);
+  rect(width / 2 - 200, height / 3.75, 400, 150, 20);
+  
+  textSize(28);
   textAlign(CENTER, CENTER);
   fill(255);
-  text("Do you want to play a game?", width / 2, height / 2 - 160);
+  text("Do you want to play a game?", width / 2, height / 3.3);
 
   // "Yes" button
   fill(0, 255, 0, 150);
-  rect(width / 2 - 80, height / 2 - 130, 60, 30, 9);
+  rect(width / 2 - 100, height / 3.05, 80, 40, 9);
   fill(0);
-  text("Yes", width / 2 - 50, height / 2 - 112);
+  text("Yes", width / 2.113, height / 2.9);
 
   // "No" button
   fill(255, 0, 0, 150);
-  rect(width / 2 + 20, height / 2 -130, 60, 30, 9);
+  rect(width / 2 + 20, height / 3.05, 80, 40, 9);
   fill(0);
-  text("No", width / 2 + 50, height / 2 - 112);
+  text("No", width / 1.893, height / 2.9);
 }
 
 function windowResized() {
