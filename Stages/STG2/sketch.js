@@ -846,6 +846,9 @@ function windowResized() {
   zoomButton.position(zoomButtonX, zoomButtonY);
   unzoomButton.position(unzoomButtonX, unzoomButtonY);
   
+  artistBt.size(artistButtonSize * windowWidth / 1600, artistButtonSize * windowWidth / 1600);
+  artistBt.position(width * 0.82, height * 0.75)
+  
   level.position(width * 0.022, height * 0.02);
   title.position((width - titleWidth1[counter]) / 2, height * 0.02);
   
