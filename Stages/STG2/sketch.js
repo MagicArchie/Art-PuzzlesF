@@ -396,7 +396,7 @@ function draw() {
 
   // Draw the description text at the updated position
   for (let i = 0; i < descriptionSpans.length; i++) {
-    descriptionSpans[i].position((width - 1000) * 0.31, descriptionTextY);
+    descriptionSpans[i].position((width - 1000) * 0.30, descriptionTextY);
   }
   
   if (score == 30) {
@@ -653,14 +653,14 @@ function mouseWheel(event) {
   targetDescriptionTextY += event.delta * scrollSpeed;
   
   // Constrain the target position to keep it within bounds
-  targetDescriptionTextY = constrain(targetDescriptionTextY, height * 0.615, height * 0.67);
+  targetDescriptionTextY = constrain(targetDescriptionTextY, height * 0.615, height * 0.66);
 
   // Move the description text towards the target position
   descriptionTextY += (targetDescriptionTextY - descriptionTextY) * 0.1;
 
   // Draw the description text at the updated position
   for (let i = 0; i < descriptionSpans.length; i++) {
-    descriptionSpans[i].position((width - 1000) * 0.31, descriptionTextY);
+    descriptionSpans[i].position((width - 1000) * 0.30, descriptionTextY);
   }
 }
 
