@@ -115,6 +115,7 @@ let oneUse2 = false;
 let oneUse3 = false;
 let oneUse4 = false;
 let showMessage = false;
+let rectVisible = true;
 
 let StageSend = 22;
 localStorage.setItem('Stage', StageSend);
@@ -343,6 +344,11 @@ function draw() {
 
   fill(235, 131, 52, 30);
   rect(-1, -1, width * 0.1, height + 1);
+  
+  if (rectVisible) {
+    fill(255, 130);
+    rect(descriptionButtonX + 5, descriptionButtonY + 5, descriptionButtonSize * windowWidth / 2000, descriptionButtonSize * windowWidth / 2000, 100);
+  }
 
   if (score === 30) {
     if (!oneUse2) {
@@ -351,7 +357,7 @@ function draw() {
       oneUse2 = true;
     }
     fill(255, 130);
-    rect(14, 730, 60, 60, 100);
+    rect(homeButtonX, homeButtonY, homeButtonSize * windowWidth / 1600, homeButtonSize * windowWidth / 1600, 100);
     fill(255, 249, 74, 50);
   }else{
     fill(255, 50);
@@ -459,6 +465,9 @@ function descriptionButtonPressed() {
     currentDescriptionSpan.style("display") === "none" ? "block" : "none"
   );
   
+  // Toggle the visibility of the rectangle
+  rectVisible = !rectVisible;
+
   console.log("Description button pressed!");
 }
 
@@ -717,10 +726,10 @@ function mousePressed() {
   if (showMessage) {
     // Check if the mouse is over the "Yes" button
     if (
-      mouseX >= width / 2 - 80 &&
-      mouseX <= width / 2 - 80 + 60 &&
-      mouseY >= height / 2 - 130 &&
-      mouseY <= height / 2 - 100
+      mouseX >= width / 2 - 100 &&
+      mouseX <= width / 2 - 100 + 80 &&
+      mouseY >= height / 3.05 &&
+      mouseY <= height / 3.05 + 40
     ) {
       // Redirect to a new URL when "Yes" is clicked
       clickG.setVolume(0.1);
@@ -738,9 +747,9 @@ function mousePressed() {
     // Check if the mouse is over the "No" button
     else if (
       mouseX >= width / 2 + 20 &&
-      mouseX <= width / 2 + 20 + 60 &&
-      mouseY >= height / 2 - 130 &&
-      mouseY <= height / 2 - 100
+      mouseX <= width / 2 + 20 + 80 &&
+      mouseY >= height / 3.05 &&
+      mouseY <= height / 3.05 + 40
     ) {
       // Reset showMessage to false if "No" is clicked
       clickG.setVolume(0.1);
@@ -764,22 +773,26 @@ function mousePressed() {
 }
 
 function displayMessageAndButtons() {
-  textSize(24);
+  fill(255, 40);
+  stroke(2);
+  rect(width / 2 - 200, height / 3.75, 400, 150, 20);
+  
+  textSize(28);
   textAlign(CENTER, CENTER);
   fill(255);
-  text("Do you want to play a game?", width / 2, height / 2 - 160);
+  text("Do you want to play a game?", width / 2, height / 3.3);
 
   // "Yes" button
   fill(0, 255, 0, 150);
-  rect(width / 2 - 80, height / 2 - 130, 60, 30, 9);
+  rect(width / 2 - 100, height / 3.05, 80, 40, 9);
   fill(0);
-  text("Yes", width / 2 - 50, height / 2 - 112);
+  text("Yes", width / 2.113, height / 2.9);
 
   // "No" button
   fill(255, 0, 0, 150);
-  rect(width / 2 + 20, height / 2 -130, 60, 30, 9);
+  rect(width / 2 + 20, height / 3.05, 80, 40, 9);
   fill(0);
-  text("No", width / 2 + 50, height / 2 - 112);
+  text("No", width / 1.893, height / 2.9);
 }
 
 function windowResized() {
