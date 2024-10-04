@@ -19,7 +19,7 @@ let margin = 80;
 let descriptionRect;
 
 let descriptionButtonSize = 80;
-let descriptionFontSize = 20; 
+let descriptionFontSize = 30; 
 
 let nightMode = false;
 let score = 0;
@@ -105,7 +105,7 @@ let currentKeyButtonIndex = 0; // Index to keep track of the current key button 
 
 let scrollSpeed = 0.1;
 let descriptionTextY; 
-let targetDescriptionTextY = 480;
+let targetDescriptionTextY;
 
 let keyButtonPressedFlags = Array(imgDescriptions.length).fill(false);
 
@@ -161,6 +161,9 @@ function preload() {
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
+  
+  descriptionTextY = height * 0.95;
+  targetDescriptionTextY = height * 0.95;
 
   nightModeButtonX = canvasWidth - nightModeButtonSize - 53;
   nightModeButtonY = 15;
@@ -278,8 +281,6 @@ function setup() {
   Complete.position(475, 60);
   Complete.mousePressed(hideComplition);
   Complete.hide();
-  
-  descriptionTextY = 480
 
   for (let i = 0; i < images.length; i++) {
     let span = createSpan("");
@@ -395,7 +396,7 @@ function draw() {
 
   // Draw the description text at the updated position
   for (let i = 0; i < descriptionSpans.length; i++) {
-    descriptionSpans[i].position((canvasWidth - 1000) / 2 + 10, descriptionTextY);
+    descriptionSpans[i].position((width - 1000) * 0.31, descriptionTextY);
   }
   
   if (score == 30) {
@@ -503,7 +504,7 @@ function zoomButtonPressed() {
   console.log("Zoom button pressed!");
 
   // Increase the font size of the description span
-  if (descriptionFontSize < 25) {
+  if (descriptionFontSize < 35) {
     descriptionFontSize += 5;
   }
 
@@ -520,7 +521,7 @@ function unzoomButtonPressed() {
   console.log("Unzoom button pressed!");
 
   // Decrease the font size of the description span
-  if (descriptionFontSize > 15) {
+  if (descriptionFontSize > 25) {
     descriptionFontSize -= 5;
   }
 
@@ -652,14 +653,14 @@ function mouseWheel(event) {
   targetDescriptionTextY += event.delta * scrollSpeed;
   
   // Constrain the target position to keep it within bounds
-  targetDescriptionTextY = constrain(targetDescriptionTextY, 480, 560);
+  targetDescriptionTextY = constrain(targetDescriptionTextY, height * 0.615, height * 0.67);
 
   // Move the description text towards the target position
   descriptionTextY += (targetDescriptionTextY - descriptionTextY) * 0.1;
 
   // Draw the description text at the updated position
   for (let i = 0; i < descriptionSpans.length; i++) {
-    descriptionSpans[i].position((canvasWidth - 1000) / 2 + 10, descriptionTextY);
+    descriptionSpans[i].position((width - 1000) * 0.31, descriptionTextY);
   }
 }
 
