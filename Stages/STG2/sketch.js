@@ -326,7 +326,7 @@ function draw() {
   rect(rectX1, height * 0.85, rectWidth1, height * 0.1, 300);
 
   fill(25);
-  rect(250, 110, 900, 300);
+  rect((width - 850 * windowWidth / 1400) / 2 + 1, height * 0.14, 850 * windowWidth / 1400, 300 * windowHeight / 800); //000
 
   let rectWidth2 = width * 0.7;
   let rectX2 = (width - rectWidth2) / 2;
@@ -360,14 +360,14 @@ function draw() {
 
   // Check if the image is visible, then draw the appropriate image
  if (visibility[counter]) {
-    image(locked[counter], (canvasWidth - 850) / 2 + 1, 110, 850, 300);
+    image(locked[counter], (width - 850 * windowWidth / 1400) / 2 + 1, height * 0.14, 850 * windowWidth / 1400, 300 * windowHeight / 800);
     keyimg.attribute('src', 'materials/keys/Key_D' + (counter + 1) + '.3.png'); // Update key image source dynamically
   } else {
     image(images[counter], (canvasWidth - 850) / 2 + 1, 110, 850, 300);
     keyimg.attribute('src', 'materials/keys/Key_G' + (counter + 1) + '.png'); // Update key image source dynamically
   }
 
-  image(frame, 200, 60, 1000, 400);
+  image(frame, width * 0.14, height * 0.075, width * 0.71, height * 0.5);
   if (score === 30) {
     fill(250, 205, 2, 190); // Green with alpha
   }else{
