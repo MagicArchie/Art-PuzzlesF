@@ -749,11 +749,12 @@ function mousePressed() {
     }
   } else {
     if (
-      mouseX >= 276 &&
-      mouseX <= 1126 &&
-      mouseY >= 110 &&
-      mouseY <= 410 &&
-      Unlock != 125
+      mouseX >= (width - 850 * windowWidth / 1400) / 2 + 1 &&
+  mouseX <= (width - 850 * windowWidth / 1400) / 2 + 1 + 850 * windowWidth / 1400 &&
+  mouseY >= height * 0.14 &&
+  mouseY <= height * 0.14 + 300 * windowHeight / 800 &&
+  Unlock != 125
+
     ) {
        choice.setVolume(0.1);
        choice.play();
