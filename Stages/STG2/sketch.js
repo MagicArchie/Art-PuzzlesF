@@ -283,11 +283,11 @@ function setup() {
   
   notification = createImg("materials/notifications/KeysClaimed.png", "note");
   notification.size(400, 150);
-  notification.position(width * 1.1, height * 1.33);
+  notification.position(width * 1.25, height * 1.33);
   
   Complete = createImg("materials/notifications/Completion2.png", "completeImg");
   Complete.size(width * 0.4, height * 1.1);
-  Complete.position(width * 0.5, height * 0.15);
+  Complete.position(width * 0.55, height * 0.15);
   Complete.mousePressed(hideComplition);
   Complete.hide();
 
