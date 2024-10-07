@@ -362,7 +362,7 @@ function draw() {
   }else{
     fill(255, 50);
   }
-  rect(width * 0.016, height * 0.09, width * 0.065, width * 0.065, 30);
+  rect(width * 0.022, height * 0.09, width * 0.055, width * 0.055, 30);
 
   // Check if the image is visible, then draw the appropriate image
  if (visibility[counter]) {
@@ -382,10 +382,10 @@ function draw() {
   textSize(28);
   textAlign(CENTER, CENTER);
   strokeWeight(1);
-  text("Points", 75, 115);
+  text("Points", width * 0.05, height * 0.12);
 
   textSize(36);
-  text(score, 75, 155); 
+  text(score, width * 0.05, height * 0.15); 
 
   fill(255);
 
