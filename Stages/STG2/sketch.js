@@ -96,6 +96,14 @@ let titles = ["Χωρίς τίτλο",
               "Τοπίο με φεγγάρι"
              ];
 
+let titlesWdth = [0.15,
+                  0.15,
+                  0.15,
+                  0.43,
+                  0.10,
+                  0.20,
+                ];
+
 let descriptionSpans = [];
 let counter = 0;
 let level;
@@ -274,12 +282,12 @@ function setup() {
   keyimg.style('pointer-events', 'none');
   
   notification = createImg("materials/notifications/KeysClaimed.png", "note");
-  notification.size(300, 100);
-  notification.position(1090, 690);
+  notification.size(400, 150);
+  notification.position(width * 1.3, height * 1.33);
   
   Complete = createImg("materials/notifications/Completion2.png", "completeImg");
-  Complete.size(450, 680);
-  Complete.position(475, 60);
+  Complete.size(width * 0.4, height * 1.1);
+  Complete.position(width * 0.6, height * 0.15);
   Complete.mousePressed(hideComplition);
   Complete.hide();
 
@@ -369,7 +377,7 @@ function draw() {
     image(locked[counter], (width - 850 * windowWidth / 1400) / 2 + 1, height * 0.14, 850 * windowWidth / 1400, 300 * windowHeight / 800);
     keyimg.attribute('src', 'materials/keys/Key_D' + (counter + 1) + '.3.png'); // Update key image source dynamically
   } else {
-    image(images[counter], (canvasWidth - 850) / 2 + 1, 110, 850, 300);
+    image(images[counter], (width - 850 * windowWidth / 1400) / 2 + 1, height * 0.14, 850 * windowWidth / 1400, 300 * windowHeight / 800);
     keyimg.attribute('src', 'materials/keys/Key_G' + (counter + 1) + '.png'); // Update key image source dynamically
   }
 
@@ -388,10 +396,10 @@ function draw() {
   text(score, width * 0.05, height * 0.15); 
 
   fill(255);
-
+  
   title.html(titles[counter]);
   if (oneUse == false){
-    title.position((width - titleWidth1[counter]) / 2, height * 0.02);
+    title.position((width - titleWidth1[counter]) / (2 + titlesWdth[counter]), height * 0.02);
     oneUse = true;
   }
   level.html("Level " + (counter + 1));
@@ -408,9 +416,6 @@ function draw() {
   if (score == 30) {
     if (staf == true) {
       image(backgroundImage2, 0, 0, width, height);
-      fill(0, 0, 0, 150);
-      noStroke();
-      rect(0, 0, canvasWidth, canvasHeight); 
     }
     if (!oneUse3) {
         Completed();
@@ -439,7 +444,7 @@ function updateTitle() {
   title.html(titles[counter]);
   titleWidth = textWidth(titles[counter]);
   
-  title.position((width - titleWidth1[counter]) / 2, height * 0.02);
+  title.position((width - titleWidth1[counter]) / (2 + titlesWdth[counter]), height * 0.02);
 }
 
 function updateImageAndDescription() {
@@ -681,27 +686,49 @@ function artistInfo() {
 }
 
 function Completed() {
-  keyimg.hide();
-  arrowRight.hide();
-  arrowLeft.hide();
+
+  for (let i = 0; i < descriptionSpans.length; i++) {
+    descriptionSpans[i].style("display", "none");
+  }
+  
+  Audio_Button.hide();
+  nightModeButton.hide();
+  zoomButton.hide();
+  unzoomButton.hide();
   returnToFirstButton.hide();
   goToLastButton.hide();
+  homeButton.hide();
+  descriptionButton.hide();
+  arrowRight.hide();
+  arrowLeft.hide();
   artistBt.hide();
+  keyimg.hide();
   title.hide();
   level.hide();
-  Complete.show();
+  Complete.show(); 
 }
 
 function hideComplition() {
-  Complete.hide();
-  keyimg.show();
-  arrowRight.show();
-  arrowLeft.show();
+  
+  for (let i = 0; i < descriptionSpans.length; i++) {
+    descriptionSpans[i].style("display", i === counter ? "block" : "none");
+  }
+  
+  Audio_Button.show();
+  nightModeButton.show();
+  zoomButton.show();
+  unzoomButton.show();
   returnToFirstButton.show();
   goToLastButton.show();
+  homeButton.show();
+  descriptionButton.show();
+  arrowRight.show();
+  arrowLeft.show();
   artistBt.show();
+  keyimg.show();
   title.show();
   level.show();
+  Complete.hide();
   staf = false;
 }
 
