@@ -362,7 +362,7 @@ function draw() {
   }else{
     fill(255, 50);
   }
-  rect(25, 85, 100, 100, 30);
+  rect(width * 0.016, height * 0.09, width * 0.065, width * 0.065, 30);
 
   // Check if the image is visible, then draw the appropriate image
  if (visibility[counter]) {
