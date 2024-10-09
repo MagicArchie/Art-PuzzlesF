@@ -220,7 +220,7 @@ function setup() {
   level.style("font-size", "32px");
   level.style("color", "#D1D1D1");
   
-  returnButton = createImg("materials/buttons/R_Button3.png", "return");
+  returnButton = createImg("materials/buttons/R_Button1.png", "return");
   returnButton.size(homeButtonSize * 3, homeButtonSize * 3);
   returnButton.position(homeButtonX, homeButtonY * 1.4);
   returnButton.mousePressed(hideComplition);
