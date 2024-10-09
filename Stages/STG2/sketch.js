@@ -221,8 +221,8 @@ function setup() {
   level.style("color", "#D1D1D1");
   
   returnButton = createImg("materials/buttons/R_Button1.png", "return");
-  returnButton.size(homeButtonSize * 3, homeButtonSize * 3);
-  returnButton.position(homeButtonX, homeButtonY * 1.45);
+  returnButton.size(homeButtonSize * 1.5, homeButtonSize * 1.5);
+  returnButton.position(homeButtonX * 5.5, homeButtonY * 1.50);
   returnButton.mousePressed(hideComplition);
   returnButton.hide();
   
