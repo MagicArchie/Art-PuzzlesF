@@ -219,7 +219,13 @@ function setup() {
   level.position(30, height * 0.02);
   level.style("font-size", "32px");
   level.style("color", "#D1D1D1");
-
+  
+  returnButton = createImg("materials/buttons/R_Button3.png", "return");
+  returnButton.size(homeButtonSize * 3, homeButtonSize * 3);
+  returnButton.position(homeButtonX, homeButtonY * 1.4);
+  returnButton.mousePressed(hideComplition);
+  returnButton.hide();
+  
   Audio_Button = createImg("materials/buttons/Audio_Button.png", "Audio_Button");
   Audio_Button.size(50, 50);
   Audio_Button.position(Audio_ButtonX, Audio_ButtonY);
@@ -367,6 +373,7 @@ function draw() {
     fill(255, 130);
     rect(homeButtonX, homeButtonY, homeButtonSize * windowWidth / 1600, homeButtonSize * windowWidth / 1600, 100);
     fill(255, 249, 74, 50);
+    stroke('orange')
   }else{
     fill(255, 50);
   }
@@ -706,6 +713,7 @@ function Completed() {
   title.hide();
   level.hide();
   Complete.show(); 
+  returnButton.show(); 
 }
 
 function hideComplition() {
@@ -729,6 +737,7 @@ function hideComplition() {
   title.show();
   level.show();
   Complete.hide();
+  returnButton.hide();
   staf = false;
 }
 
