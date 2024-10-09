@@ -222,7 +222,7 @@ function setup() {
   
   returnButton = createImg("materials/buttons/R_Button1.png", "return");
   returnButton.size(homeButtonSize * 3, homeButtonSize * 3);
-  returnButton.position(homeButtonX, homeButtonY * 1.4);
+  returnButton.position(homeButtonX, homeButtonY * 1.45);
   returnButton.mousePressed(hideComplition);
   returnButton.hide();
   
